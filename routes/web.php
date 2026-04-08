@@ -1,20 +1,68 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengembalianController;
+use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\DashboardController;
+
+/*
+|--------------------------------------------------------------------------
+| Public
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Auth
+|--------------------------------------------------------------------------
+*/
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth'])->group(function () {
+
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
+    /*
+    |--------------------------------------------------------------------------
+    | BOOKS
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('books', BookController::class);
+
+    /*
+    |--------------------------------------------------------------------------
+    | PEMINJAMAN
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+    Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+
+    Route::post('/peminjaman/{id}/approve', [PeminjamanController::class, 'approve'])->name('peminjaman.approve');
+    Route::post('/peminjaman/{id}/reject', [PeminjamanController::class, 'reject'])->name('peminjaman.reject');
+
+    /*
+    |--------------------------------------------------------------------------
+    | PENGEMBALIAN
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
+    Route::post('/pengembalian/{id}', [PengembalianController::class, 'store'])->name('pengembalian.store');
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOG
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/logs', [ActivityLogController::class, 'index'])->name('logs.index');
+
 });
 
 require __DIR__.'/auth.php';
