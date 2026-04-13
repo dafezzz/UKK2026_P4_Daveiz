@@ -1,20 +1,22 @@
-<ul class="navbar-nav sidebar sidebar-dark accordion shadow-sm" id="accordionSidebar"
-    style="width: 220px; background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);">
+<ul class="navbar-nav sidebar sidebar-dark accordion shadow-sm"
+    id="accordionSidebar"
+    style="width: 220px; min-height: 100vh; background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);">
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('dashboard') }}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink fa-lg text-white"></i>
+    <!-- Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3"
+       href="{{ route('dashboard') }}">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-book-open text-white"></i>
         </div>
-        <div class="sidebar-brand-text mx-2 fw-bold fs-6 text-white">
-            Perpustakaan Digital
+        <div class="sidebar-brand-text mx-2 fw-bold text-white">
+            Perpustakaan
         </div>
     </a>
 
-    <hr class="sidebar-divider my-1 border-light">
+    <hr class="sidebar-divider my-2 border-light">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
+    <!-- Dashboard -->
+    <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
@@ -23,22 +25,82 @@
 
     <hr class="sidebar-divider border-light">
 
-    @if(auth()->user()->role === 'resident')
-       
-    
-       
-          
+    <!-- MASTER DATA -->
+    <div class="sidebar-heading text-white small px-3">
+        MASTER DATA
+    </div>
 
-        <hr class="sidebar-divider border-light">
-    @endif
+    <!-- Pengarang -->
+    <li class="nav-item {{ request()->routeIs('pengarang.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pengarang.index') }}">
+            <i class="fas fa-user-edit"></i>
+            <span>Pengarang</span>
+        </a>
+    </li>
 
-    
+     <li class="nav-item {{ request()->routeIs('kategori.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('kategori.index') }}">
+            <i class="fas fa-user-edit"></i>
+            <span>Kategori</span>
+        </a>
+    </li>
+
+    <!-- anggota -->
+    <li class="nav-item {{ request()->routeIs('anggota.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('anggota.index') }}">
+            <i class="fas fa-book"></i>
+            <span>anggota</span>
+        </a>
+    </li>
+
+      <li class="nav-item {{ request()->routeIs('kelas.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('kelas.index') }}">
+            <i class="fas fa-book"></i>
+            <span>kelas</span>
+        </a>
+    </li>
+
+
+    <hr class="sidebar-divider border-light">
+
+    <!-- TRANSAKSI -->
+    <div class="sidebar-heading text-white small px-3">
+        TRANSAKSI
+    </div>
+
+    <!-- Peminjaman -->
+    <li class="nav-item {{ request()->routeIs('peminjaman.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('peminjaman.index') }}">
+            <i class="fas fa-book-reader"></i>
+            <span>Peminjaman</span>
+        </a>
+    </li>
+
+    <!-- Pengembalian -->
+    <li class="nav-item {{ request()->routeIs('pengembalian.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pengembalian.index') }}">
+            <i class="fas fa-undo"></i>
+            <span>Pengembalian</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider border-light">
+
+    <!-- LOG -->
+    <li class="nav-item {{ request()->routeIs('logs.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('logs.index') }}">
+            <i class="fas fa-history"></i>
+            <span>Activity Log</span>
+        </a>
+    </li>
 
     <hr class="sidebar-divider d-none d-md-block border-light">
 
+    <!-- Toggle -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
+
 </ul>
 
 <style>
