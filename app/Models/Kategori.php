@@ -11,6 +11,6 @@ class Kategori extends Model
    //relasi
     public function books()
     {
-        return $this->hasMany(Book::class);
+        return $this->hasMany(Buku::class);
     }
 }

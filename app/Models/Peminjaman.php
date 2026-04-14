@@ -2,45 +2,31 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Book;
-use App\Models\Pengembalian;
 
 class Peminjaman extends Model
 {
+    use HasFactory;
+
     protected $table = 'peminjaman';
 
     protected $fillable = [
-        'kode_peminjaman',
         'user_id',
-        'book_id',
+        'buku_id',
         'tanggal_pinjam',
         'tanggal_kembali',
-        'status',
-        'approved_by',
-        'approved_at',
-        'returned_at'
+        'status'
     ];
 
-    //  RELASI
+    // RELASI
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function book()
+    public function buku()
     {
-        return $this->belongsTo(Book::class);
-    }
-
-    public function approver()
-    {
-        return $this->belongsTo(User::class, 'approved_by');
-    }
-
-    public function pengembalian()
-    {
-        return $this->hasOne(Pengembalian::class);
+        return $this->belongsTo(Buku::class);
     }
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\BookController;
 use App\Http\Controllers\PengarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
@@ -10,48 +9,58 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PenerbitController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\BukuController;
+use App\Http\Controllers\ApprovalController;
 
-// halaman awal
 Route::get('/', function () {
     return view('auth.login');
 });
 
-// semua harus login
 Route::middleware(['auth'])->group(function () {
 
     // dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // master data
+    // master
     Route::resource('pengarang', PengarangController::class);
-    Route::resource('books', BookController::class);
+    Route::resource('penerbit', PenerbitController::class);
+    Route::resource('kategori', KategoriController::class);
+    Route::resource('kelas', KelasController::class);
 
-    //kelas
-    Route::resource('kelas', \App\Http\Controllers\KelasController::class);
-
-    //anggota
+    // user
+    Route::resource('admin', AdminController::class);
+    Route::resource('petugas', PetugasController::class);
     Route::resource('anggota', AnggotaController::class);
 
-    //kategori
-    Route::resource('kategori', KategoriController::class);
+    // buku
+    Route::resource('buku', BukuController::class);
 
-    // peminjaman
-    Route::prefix('peminjaman')->name('peminjaman.')->group(function () {
-        Route::get('/', [PeminjamanController::class, 'index'])->name('index');
-        Route::post('/', [PeminjamanController::class, 'store'])->name('store');
-        Route::post('{id}/approve', [PeminjamanController::class, 'approve'])->name('approve');
-        Route::post('{id}/reject', [PeminjamanController::class, 'reject'])->name('reject');
-    });
+    // peminjaman (ajukan pinjam)
+    Route::post('/peminjaman', [PeminjamanController::class, 'store'])
+        ->name('peminjaman.store');
 
-    // pengembalian
-    Route::prefix('pengembalian')->name('pengembalian.')->group(function () {
-        Route::get('/', [PengembalianController::class, 'index'])->name('index');
-        Route::post('{id}', [PengembalianController::class, 'store'])->name('store');
+    // 🔥 pengajuan pengembalian (user)
+    Route::get('/pengembalian', [PengembalianController::class, 'index'])
+        ->name('pengembalian.index');
+
+    Route::post('/pengembalian/{id}', [PengembalianController::class, 'store'])
+        ->name('pengembalian.store');
+
+    // approval (admin / petugas)
+    Route::prefix('approval')->name('approval.')->group(function () {
+        Route::get('/', [ApprovalController::class, 'index'])->name('index');
+        Route::post('{id}/approve', [ApprovalController::class, 'approve'])->name('approve');
+        Route::post('{id}/reject', [ApprovalController::class, 'reject'])->name('reject');
+        Route::post('{id}/konfirmasi', [ApprovalController::class, 'konfirmasi'])->name('konfirmasi');
+        Route::post('{id}/selesai', [ApprovalController::class, 'selesai'])->name('selesai');
     });
 
     // log
-    Route::get('/logs', [ActivityLogController::class, 'index'])->name('logs.index');
-
+    Route::get('/logs', [ActivityLogController::class, 'index'])
+        ->name('logs.index');
 });
 
 require __DIR__.'/auth.php';

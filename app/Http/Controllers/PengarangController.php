@@ -21,15 +21,16 @@ class PengarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|max:255'
+            'nama' => 'required',
+            'email' => 'nullable|email',
+            'telepon' => 'nullable',
+            'alamat' => 'nullable',
         ]);
 
-        Pengarang::create([
-            'nama' => $request->nama
-        ]);
+        Pengarang::create($request->all());
 
         return redirect()->route('pengarang.index')
-            ->with('success', 'Pengarang berhasil ditambahkan');
+            ->with('success','Data Pengarang berhasil ditambah');
     }
 
     public function edit($id)
@@ -40,25 +41,23 @@ class PengarangController extends Controller
 
     public function update(Request $request, $id)
     {
+        $pengarang = Pengarang::findOrFail($id);
+
         $request->validate([
-            'nama' => 'required|max:255'
+            'nama' => 'required',
+            'email' => 'nullable|email',
         ]);
 
-        $pengarang = Pengarang::findOrFail($id);
-        $pengarang->update([
-            'nama' => $request->nama
-        ]);
+        $pengarang->update($request->all());
 
         return redirect()->route('pengarang.index')
-            ->with('success', 'Pengarang berhasil diupdate');
+            ->with('success','Data Pengarang Berhasil diupdate');
     }
 
     public function destroy($id)
     {
-        $pengarang = Pengarang::findOrFail($id);
-        $pengarang->delete();
+        Pengarang::destroy($id);
 
-        return redirect()->route('pengarang.index')
-            ->with('success', 'Pengarang berhasil dihapus');
+        return back()->with('success','Data dihapus');
     }
 }

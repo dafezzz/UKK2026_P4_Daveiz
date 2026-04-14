@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
@@ -44,13 +45,15 @@ class AnggotaController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('anggota.index')->with('success','Anggota berhasil ditambah');
+        return redirect()->route('anggota.index')
+            ->with('success','Berhasil tambah');
     }
 
     public function edit($id)
     {
         $anggota = Anggota::with('user')->findOrFail($id);
         $kelas = Kelas::all();
+
         return view('anggota.edit', compact('anggota','kelas'));
     }
 
@@ -75,14 +78,15 @@ class AnggotaController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('anggota.index')->with('success','Data diupdate');
+        return redirect()->route('anggota.index')
+            ->with('success','Berhasil update');
     }
 
     public function destroy($id)
     {
         $anggota = Anggota::findOrFail($id);
-        $anggota->user->delete(); // otomatis hapus anggota juga
+        $anggota->user->delete();
 
-        return back()->with('success','Data dihapus');
+        return back()->with('success','Berhasil hapus');
     }
 }

@@ -6,11 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengarang extends Model
 {
-    protected $fillable = ['nama'];
+    protected $fillable = [
+    'nama',
+    'email',
+    'telepon',
+    'alamat'
+];
 
-    // relasi ke buku (nanti dipakai)
+    // relasi ke buku 
     public function books()
     {
-        return $this->hasMany(Book::class);
+        return $this->hasMany(Buku::class);
     }
+
 }

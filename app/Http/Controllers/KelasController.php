@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-namespace App\Http\Controllers;
-
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 
@@ -12,7 +9,7 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $kelas = Kelas::latest()->paginate(10);
+        $kelas = Kelas::latest()->get();
         return view('kelas.index', compact('kelas'));
     }
 
@@ -24,38 +21,42 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kelas' => 'required|unique:kelas,nama_kelas'
+            'tingkat' => 'required',
+            'jurusan' => 'required',
+            'nama_kelas' => 'required',
         ]);
 
-        Kelas::create([
-            'nama_kelas' => $request->nama_kelas
-        ]);
+        Kelas::create($request->all());
 
-        return redirect()->route('kelas.index')->with('success', 'Kelas berhasil ditambah');
+        return redirect()->route('kelas.index')
+            ->with('success','Kelas berhasil ditambah');
     }
 
-    public function edit(Kelas $kela)
+    public function edit($id)
     {
-        return view('kelas.edit', ['kelas' => $kela]);
+        $kelas = Kelas::findOrFail($id);
+        return view('kelas.edit', compact('kelas'));
     }
 
-    public function update(Request $request, Kelas $kela)
+    public function update(Request $request, $id)
     {
+        $kelas = Kelas::findOrFail($id);
+
         $request->validate([
-            'nama_kelas' => 'required|unique:kelas,nama_kelas,' . $kela->id
+            'tingkat' => 'required',
+            'jurusan' => 'required',
+            'nama_kelas' => 'required',
         ]);
 
-        $kela->update([
-            'nama_kelas' => $request->nama_kelas
-        ]);
+        $kelas->update($request->all());
 
-        return redirect()->route('kelas.index')->with('success', 'Kelas berhasil diupdate');
+        return redirect()->route('kelas.index')
+            ->with('success','Data diupdate');
     }
 
-    public function destroy(Kelas $kela)
+    public function destroy($id)
     {
-        $kela->delete();
-
-        return redirect()->route('kelas.index')->with('success', 'Kelas berhasil dihapus');
+        Kelas::destroy($id);
+        return back()->with('success','Data dihapus');
     }
 }

@@ -62,7 +62,7 @@
                 <div class="card-header">Buku Terbaru</div>
                 <div class="card-body">
                     <ul class="list-group">
-                        @foreach($books as $b)
+                        @foreach($buku as $b)
                             <li class="list-group-item">
                                 {{ $b->judul }}
                             </li>

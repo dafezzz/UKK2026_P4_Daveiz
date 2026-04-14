@@ -2,26 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pengembalian;
 use App\Models\Peminjaman;
+use Illuminate\Support\Facades\Auth;
 
 class PengembalianController extends Controller
 {
-    public function store(Request $request)
+    public function index()
     {
-        $peminjaman = Peminjaman::findOrFail($request->peminjaman_id);
+        // tampilkan yg dipinjam + yg lagi diajukan pengembalian
+        $data = Peminjaman::with('buku.pengarang')
+            ->where('user_id', Auth::id())
+            ->whereIn('status', ['dipinjam', 'pengembalian'])
+            ->latest()
+            ->get();
 
-        Pengembalian::create([
-            'peminjaman_id' => $peminjaman->id,
-            'tanggal_pengembalian' => now(),
-            'denda' => 0
+        return view('pengembalian.index', compact('data'));
+    }
+
+    public function store($id)
+    {
+        $pinjam = Peminjaman::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        // cegah double klik
+        if ($pinjam->status == 'pengembalian') {
+            return back()->with('error', 'Sudah diajukan sebelumnya');
+        }
+
+        $pinjam->update([
+            'status' => 'pengembalian'
         ]);
 
-        $peminjaman->update([
-            'status' => 'dikembalikan'
-        ]);
-
-        return back()->with('success', 'Pengembalian berhasil');
+        return back()->with('success', 'Pengajuan pengembalian dikirim');
     }
 }

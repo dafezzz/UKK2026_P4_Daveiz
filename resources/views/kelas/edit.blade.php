@@ -1,31 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
-    <h4>Edit Kelas</h4>
+    <h5 class="mb-4">Edit Kelas</h5>
 
-    <div class="card shadow">
+    <div class="card border-0 shadow-sm">
         <div class="card-body">
 
-            <form action="{{ route('kelas.update', $kelas->id) }}" method="POST">
-                @csrf
-                @method('PUT')
+            <form action="{{ route('kelas.update',$kelas->id) }}" method="POST">
+                @csrf @method('PUT')
+
+                <div class="mb-3">
+                    <label>Tingkat</label>
+                    <input type="text" name="tingkat" class="form-control" value="{{ $kelas->tingkat }}">
+                </div>
+
+                <div class="mb-3">
+                    <label>Jurusan</label>
+                    <input type="text" name="jurusan" class="form-control" value="{{ $kelas->jurusan }}">
+                </div>
 
                 <div class="mb-3">
                     <label>Nama Kelas</label>
-                    <input type="text" name="nama_kelas"
-                           class="form-control @error('nama_kelas') is-invalid @enderror"
-                           value="{{ old('nama_kelas', $kelas->nama_kelas) }}">
-
-                    @error('nama_kelas')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <input type="text" name="nama_kelas" class="form-control" value="{{ $kelas->nama_kelas }}">
                 </div>
 
-                <button class="btn btn-primary">Update</button>
-                <a href="{{ route('kelas.index') }}" class="btn btn-secondary">Kembali</a>
-
+                <button class="btn btn-primary btn-sm">Update</button>
             </form>
 
         </div>
