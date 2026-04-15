@@ -19,10 +19,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth'])->group(function () {
+// dashboard (semua login)
+Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// ================= ADMIN =================
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // master
     Route::resource('pengarang', PengarangController::class);
@@ -35,21 +37,25 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('petugas', PetugasController::class);
     Route::resource('anggota', AnggotaController::class);
 
-    // buku
+    // log
+    Route::get('/logs', [ActivityLogController::class, 'index'])->name('logs.index');
+});
+
+
+// ================= ADMIN & PETUGAS =================
+Route::middleware(['auth', 'role:admin,petugas'])->group(function () {
+
+    // buku (FULL AKSES)
     Route::resource('buku', BukuController::class);
 
-    // peminjaman (ajukan pinjam)
-    Route::post('/peminjaman', [PeminjamanController::class, 'store'])
-        ->name('peminjaman.store');
+    // peminjaman
+    Route::post('/katalog', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 
-    // 🔥 pengajuan pengembalian (user)
-    Route::get('/pengembalian', [PengembalianController::class, 'index'])
-        ->name('pengembalian.index');
+    // pengembalian
+    Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
+    Route::post('/pengembalian/{id}', [PengembalianController::class, 'store'])->name('pengembalian.store');
 
-    Route::post('/pengembalian/{id}', [PengembalianController::class, 'store'])
-        ->name('pengembalian.store');
-
-    // approval (admin / petugas)
+    // approval
     Route::prefix('approval')->name('approval.')->group(function () {
         Route::get('/', [ApprovalController::class, 'index'])->name('index');
         Route::post('{id}/approve', [ApprovalController::class, 'approve'])->name('approve');
@@ -57,10 +63,28 @@ Route::middleware(['auth'])->group(function () {
         Route::post('{id}/konfirmasi', [ApprovalController::class, 'konfirmasi'])->name('konfirmasi');
         Route::post('{id}/selesai', [ApprovalController::class, 'selesai'])->name('selesai');
     });
-
-    // log
-    Route::get('/logs', [ActivityLogController::class, 'index'])
-        ->name('logs.index');
 });
+// ================= ANGGOTTA =================
+Route::middleware(['auth', 'role:anggota'])->group(function () {
 
+    Route::get('/katalog', [BukuController::class, 'katalogUser'])
+        ->name('katalog.user');
+
+    Route::get('/buku/{id}', [BukuController::class, 'showUser'])
+        ->name('buku.user.detail');
+
+
+    Route::get('/pengembalian-user', [PengembalianController::class, 'index'])
+        ->name('pengembalian.user');
+
+    Route::post('/pengembalian-user/{id}', [PengembalianController::class, 'store'])
+        ->name('pengembalian.user.store');
+
+    Route::get('/riwayat', [PeminjamanController::class, 'riwayat'])
+        ->name('riwayat.user');
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
+
+});
 require __DIR__.'/auth.php';
