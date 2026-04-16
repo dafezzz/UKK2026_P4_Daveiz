@@ -31,25 +31,27 @@
 
                 <!-- COVER -->
                 <div class="position-relative book-cover">
-                    <img src="{{ $b->cover ? asset('storage/'.$b->cover) : 'https://via.placeholder.com/300x200' }}"
-                         class="w-100 cover-img">
+                    
+                    <img 
+                        src="{{ $b->cover ? asset('images/'.$b->cover) : 'https://via.placeholder.com/300x200' }}"
+                        class="w-100 cover-img"
+                    >
 
                     <!-- STATUS -->
                     <span class="badge position-absolute top-0 end-0 m-2 
                         {{ $b->stok > 0 ? 'bg-success' : 'bg-secondary' }}">
                         {{ $b->stok > 0 ? 'Tersedia' : 'Habis' }}
                     </span>
+
                 </div>
 
                 <!-- BODY -->
                 <div class="card-body">
 
-                    <!-- JUDUL -->
                     <div class="book-title mb-2" title="{{ $b->judul }}">
                         {{ $b->judul }}
                     </div>
 
-                    <!-- DETAIL -->
                     <div class="book-meta">
                         <div><span>Pengarang</span> {{ $b->pengarang->nama ?? '-' }}</div>
                         <div><span>Penerbit</span> {{ $b->penerbit->nama ?? '-' }}</div>
@@ -59,7 +61,6 @@
                         @endif
                     </div>
 
-                    <!-- STOK -->
                     <div class="mt-3">
                         <span class="badge bg-light text-dark border">
                             Stok: {{ $b->stok }}
@@ -70,16 +71,13 @@
 
                 <!-- FOOTER -->
                 <div class="card-footer bg-white border-0 pt-0">
-
                     <div class="d-flex gap-2">
 
-                        <!-- EDIT -->
                         <a href="{{ route('buku.edit',$b->id) }}"
                            class="btn btn-outline-primary btn-sm w-100">
                             Edit
                         </a>
 
-                        <!-- DELETE -->
                         <form action="{{ route('buku.destroy',$b->id) }}" method="POST" class="w-100"
                               onsubmit="return confirm('Yakin hapus buku ini?')">
                             @csrf
@@ -90,7 +88,6 @@
                         </form>
 
                     </div>
-
                 </div>
 
             </div>
@@ -126,12 +123,14 @@
 }
 
 .cover-img {
+    width: 100%;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.2s ease;
 }
 
+/* HOVER IMAGE */
 .book-card:hover .cover-img {
     transform: scale(1.03);
 }

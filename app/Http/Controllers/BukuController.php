@@ -8,6 +8,7 @@ use App\Models\Penerbit;
 use App\Models\Kategori;
 use App\Models\Rak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BukuController extends Controller
 {
@@ -40,14 +41,19 @@ class BukuController extends Controller
             'kategori_id' => 'required',
             'stok' => 'required|integer|min:0',
             'rak_id' => 'nullable|exists:raks,id',
-            'cover' => 'nullable|image|max:2048'
+            'cover' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $data = $request->all();
 
-        // upload cover
+        // ================= UPLOAD COVER =================
         if ($request->hasFile('cover')) {
-            $data['cover'] = $request->file('cover')->store('cover', 'public');
+            $file = $request->file('cover');
+            $filename = time() . '_' . uniqid() . '.' . $file->extension();
+
+            $file->move(public_path('images'), $filename);
+
+            $data['cover'] = $filename;
         }
 
         Buku::create($data);
@@ -80,14 +86,25 @@ class BukuController extends Controller
             'kategori_id' => 'required',
             'stok' => 'required|integer|min:0',
             'rak_id' => 'nullable|exists:raks,id',
-            'cover' => 'nullable|image|max:2048'
+            'cover' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $data = $request->all();
 
-        // upload cover baru
+        // ================= UPDATE COVER =================
         if ($request->hasFile('cover')) {
-            $data['cover'] = $request->file('cover')->store('cover', 'public');
+
+            // hapus cover lama
+            if ($buku->cover && File::exists(public_path('images/' . $buku->cover))) {
+                File::delete(public_path('images/' . $buku->cover));
+            }
+
+            $file = $request->file('cover');
+            $filename = time() . '_' . uniqid() . '.' . $file->extension();
+
+            $file->move(public_path('images'), $filename);
+
+            $data['cover'] = $filename;
         }
 
         $buku->update($data);
@@ -98,7 +115,14 @@ class BukuController extends Controller
 
     public function destroy($id)
     {
-        Buku::findOrFail($id)->delete();
+        $buku = Buku::findOrFail($id);
+
+        // hapus cover dari folder
+        if ($buku->cover && File::exists(public_path('images/' . $buku->cover))) {
+            File::delete(public_path('images/' . $buku->cover));
+        }
+
+        $buku->delete();
 
         return back()->with('success', 'Buku berhasil dihapus');
     }
@@ -127,7 +151,8 @@ class BukuController extends Controller
 
     public function showUser($id)
     {
-        $buku = Buku::with(['pengarang', 'penerbit', 'kategori', 'rak'])->findOrFail($id);
+        $buku = Buku::with(['pengarang', 'penerbit', 'kategori', 'rak'])
+            ->findOrFail($id);
 
         return view('user.detail-buku', compact('buku'));
     }

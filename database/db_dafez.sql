@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 16, 2026 at 03:55 AM
+-- Generation Time: Apr 16, 2026 at 07:22 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -80,7 +80,8 @@ INSERT INTO `activity_logs` (`id`, `user_id`, `action`, `model`, `model_id`, `de
 (34, 10, 'peminjaman_approved', 'Peminjaman', 20, 'Disetujui sampai 2026-04-23 02:07:12', NULL, '2026-04-15 19:07:12', '2026-04-15 19:07:12'),
 (35, 10, 'peminjaman_approved', 'Peminjaman', 21, 'Disetujui sampai 2026-04-23 02:07:47', NULL, '2026-04-15 19:07:47', '2026-04-15 19:07:47'),
 (36, 10, 'peminjaman_approved', 'Peminjaman', 22, 'Disetujui sampai 2026-04-23 02:14:44', NULL, '2026-04-15 19:14:44', '2026-04-15 19:14:44'),
-(37, 10, 'peminjaman_approved', 'Peminjaman', 23, 'Disetujui sampai 2026-04-23 02:42:46', NULL, '2026-04-15 19:42:46', '2026-04-15 19:42:46');
+(37, 10, 'peminjaman_approved', 'Peminjaman', 23, 'Disetujui sampai 2026-04-23 02:42:46', NULL, '2026-04-15 19:42:46', '2026-04-15 19:42:46'),
+(38, 10, 'peminjaman_approved', 'Peminjaman', 24, 'Disetujui sampai 2026-04-23 07:11:59', NULL, '2026-04-16 00:12:00', '2026-04-16 00:12:00');
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,8 @@ CREATE TABLE `bukus` (
 --
 
 INSERT INTO `bukus` (`id`, `judul`, `pengarang_id`, `penerbit_id`, `kategori_id`, `isbn`, `tahun`, `stok`, `cover`, `created_at`, `updated_at`, `rak_id`) VALUES
-(1, 'Buku Biar Kaya', 1, 1, 1, NULL, NULL, 800, 'cover/lGXozhCGS2L8KIivv1j0wdPTWyGSVuY2sD6hCHBM.jpg', '2026-04-13 22:26:06', '2026-04-15 20:01:09', 1);
+(1, 'Mie Ayam Sebelum Mati', 1, 1, 12, NULL, NULL, 799, '1776322375_69e08747a3025.png', '2026-04-13 22:26:06', '2026-04-16 00:20:48', 1),
+(2, 'Prabowo Apa Adanya', 2, 2, 1, NULL, NULL, 1000, '1776323993_69e08d9961105.png', '2026-04-16 00:19:53', '2026-04-16 00:19:53', 5);
 
 -- --------------------------------------------------------
 
@@ -422,7 +424,7 @@ INSERT INTO `peminjaman` (`id`, `user_id`, `buku_id`, `tanggal_pinjam`, `tanggal
 (20, 10, 1, '2026-04-16 02:07:12', '2026-04-23', '2026-04-16 02:07:29', 'dikembalikan', '2026-04-15 19:06:55', '2026-04-15 19:07:29'),
 (22, 10, 1, '2026-04-16 02:14:44', '2026-04-10', '2026-04-16 02:26:42', 'dikembalikan', '2026-04-15 19:14:36', '2026-04-15 19:26:42'),
 (23, 10, 1, '2026-04-16 02:42:46', '2026-04-05', '2026-04-16 02:43:33', 'dikembalikan', '2026-04-15 19:42:38', '2026-04-15 19:43:33'),
-(24, 10, 1, NULL, NULL, NULL, 'pending', '2026-04-15 20:50:23', '2026-04-15 20:50:23');
+(24, 10, 1, '2026-04-16 07:11:59', '2026-04-23', NULL, 'dipinjam', '2026-04-15 20:50:23', '2026-04-16 00:11:59');
 
 -- --------------------------------------------------------
 
@@ -448,7 +450,8 @@ CREATE TABLE `penerbits` (
 --
 
 INSERT INTO `penerbits` (`id`, `nama`, `kode`, `kota`, `negara`, `alamat`, `telepon`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'Telkom University', '98', 'Bandung', 'Indonesia', 'Bandung', '655866453', 'Telkom@gmail.com', '2026-04-13 19:10:17', '2026-04-13 19:10:29');
+(1, 'Telkom University', '98', 'Bandung', 'Indonesia', 'Bandung', '655866453', 'Telkom@gmail.com', '2026-04-13 19:10:17', '2026-04-13 19:10:29'),
+(2, 'Gramedia', '2002', 'Bandung', 'Indonesia', 'Bandung', '4535435', 'Gramedia@gmail.com', '2026-04-16 00:09:55', '2026-04-16 00:09:55');
 
 -- --------------------------------------------------------
 
@@ -472,7 +475,8 @@ CREATE TABLE `pengarangs` (
 
 INSERT INTO `pengarangs` (`id`, `nama`, `email`, `telepon`, `alamat`, `created_at`, `updated_at`) VALUES
 (1, 'Yana', 'yana@gmail.com', '093482384', 'Antapani Lama', '2026-04-13 19:31:19', '2026-04-13 19:31:19'),
-(2, 'Alibama', 'alibama@gmail.com', '085634343', 'antapni', '2026-04-15 19:27:11', '2026-04-15 19:27:22');
+(2, 'Alibama', 'alibama@gmail.com', '085634343', 'antapni', '2026-04-15 19:27:11', '2026-04-15 19:27:22'),
+(3, 'Joko Anwar', 'anwar@gmail.com', '4543436', 'Jakarta', '2026-04-16 00:09:19', '2026-04-16 00:09:19');
 
 -- --------------------------------------------------------
 
@@ -532,7 +536,11 @@ CREATE TABLE `raks` (
 --
 
 INSERT INTO `raks` (`id`, `kode_rak`, `nama_rak`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 'A1', 'Rak Sejarah', NULL, '2026-04-15 19:58:49', '2026-04-15 19:58:49');
+(1, 'A1', 'Rak Sejarah', NULL, '2026-04-15 19:58:49', '2026-04-15 19:58:49'),
+(2, 'A2', 'Rak Publik', NULL, '2026-04-16 00:10:24', '2026-04-16 00:10:24'),
+(3, 'B2', 'Rak Private', NULL, '2026-04-16 00:10:38', '2026-04-16 00:10:38'),
+(4, 'B1', 'Rak Student', NULL, '2026-04-16 00:10:59', '2026-04-16 00:10:59'),
+(5, 'C1', 'Rak Pelajaran', NULL, '2026-04-16 00:11:22', '2026-04-16 00:11:22');
 
 -- --------------------------------------------------------
 
@@ -762,7 +770,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -780,7 +788,7 @@ ALTER TABLE `anggotas`
 -- AUTO_INCREMENT for table `bukus`
 --
 ALTER TABLE `bukus`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `denda`
@@ -828,13 +836,13 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT for table `penerbits`
 --
 ALTER TABLE `penerbits`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pengarangs`
 --
 ALTER TABLE `pengarangs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengembalian`
@@ -852,7 +860,7 @@ ALTER TABLE `petugas`
 -- AUTO_INCREMENT for table `raks`
 --
 ALTER TABLE `raks`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
