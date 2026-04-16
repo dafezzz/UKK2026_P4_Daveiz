@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 14, 2026 at 07:59 AM
+-- Generation Time: Apr 16, 2026 at 03:55 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `activity_logs` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `activity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `model` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `model_id` bigint DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
@@ -38,6 +38,49 @@ CREATE TABLE `activity_logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `activity_logs`
+--
+
+INSERT INTO `activity_logs` (`id`, `user_id`, `action`, `model`, `model_id`, `description`, `ip_address`, `created_at`, `updated_at`) VALUES
+(1, 10, 'peminjaman_approved', 'Peminjaman', 9, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-22', NULL, '2026-04-15 09:19:33', '2026-04-15 09:19:33'),
+(2, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:50', '2026-04-15 09:20:50'),
+(3, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:51', '2026-04-15 09:20:51'),
+(4, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:51', '2026-04-15 09:20:51'),
+(5, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:52', '2026-04-15 09:20:52'),
+(6, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:52', '2026-04-15 09:20:52'),
+(7, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:53', '2026-04-15 09:20:53'),
+(8, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:53', '2026-04-15 09:20:53'),
+(9, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:54', '2026-04-15 09:20:54'),
+(10, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:57', '2026-04-15 09:20:57'),
+(11, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:57', '2026-04-15 09:20:57'),
+(12, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:58', '2026-04-15 09:20:58'),
+(13, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:58', '2026-04-15 09:20:58'),
+(14, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:59', '2026-04-15 09:20:59'),
+(15, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:59', '2026-04-15 09:20:59'),
+(16, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:00', '2026-04-15 09:21:00'),
+(17, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:01', '2026-04-15 09:21:01'),
+(18, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:03', '2026-04-15 09:21:03'),
+(19, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:04', '2026-04-15 09:21:04'),
+(20, 10, 'peminjaman_approved', 'Peminjaman', 10, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, '2026-04-15 17:20:23', '2026-04-15 17:20:23'),
+(21, 10, 'denda_recorded', 'Denda', 10, 'Denda Rp 34,893 untuk keterlambatan 6.9786974663425925 hari', NULL, '2026-04-15 17:30:42', '2026-04-15 17:30:42'),
+(22, 10, 'pengembalian_completed', 'Peminjaman', 10, 'Pengembalian Buku Biar Kaya selesai', NULL, '2026-04-15 17:30:42', '2026-04-15 17:30:42'),
+(23, 10, 'peminjaman_approved', 'Peminjaman', 11, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, '2026-04-15 17:31:30', '2026-04-15 17:31:30'),
+(24, 10, 'peminjaman_approved', 'Peminjaman', 12, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, '2026-04-15 17:58:37', '2026-04-15 17:58:37'),
+(25, 10, 'denda_recorded', 'Denda', 11, 'Denda Rp 34,796 untuk keterlambatan 6.959253443275463 hari', NULL, '2026-04-15 17:58:42', '2026-04-15 17:58:42'),
+(26, 10, 'pengembalian_completed', 'Peminjaman', 11, 'Pengembalian Buku Biar Kaya selesai', NULL, '2026-04-15 17:58:42', '2026-04-15 17:58:42'),
+(27, 10, 'peminjaman_approved', 'Peminjaman', 13, 'Disetujui sampai 2026-04-23 01:20:29', NULL, '2026-04-15 18:20:29', '2026-04-15 18:20:29'),
+(28, 10, 'peminjaman_approved', 'Peminjaman', 14, 'Disetujui sampai 2026-04-23 01:24:38', NULL, '2026-04-15 18:24:38', '2026-04-15 18:24:38'),
+(29, 10, 'peminjaman_approved', 'Peminjaman', 15, 'Disetujui sampai 2026-04-23 01:32:14', NULL, '2026-04-15 18:32:14', '2026-04-15 18:32:14'),
+(30, 10, 'peminjaman_approved', 'Peminjaman', 16, 'Disetujui sampai 2026-04-23 01:35:04', NULL, '2026-04-15 18:35:04', '2026-04-15 18:35:04'),
+(31, 10, 'peminjaman_approved', 'Peminjaman', 17, 'Disetujui sampai 2026-04-23 01:52:52', NULL, '2026-04-15 18:52:52', '2026-04-15 18:52:52'),
+(32, 10, 'peminjaman_approved', 'Peminjaman', 18, 'Disetujui sampai 2026-04-23 01:55:13', NULL, '2026-04-15 18:55:13', '2026-04-15 18:55:13'),
+(33, 10, 'peminjaman_approved', 'Peminjaman', 19, 'Disetujui sampai 2026-04-23 02:02:27', NULL, '2026-04-15 19:02:27', '2026-04-15 19:02:27'),
+(34, 10, 'peminjaman_approved', 'Peminjaman', 20, 'Disetujui sampai 2026-04-23 02:07:12', NULL, '2026-04-15 19:07:12', '2026-04-15 19:07:12'),
+(35, 10, 'peminjaman_approved', 'Peminjaman', 21, 'Disetujui sampai 2026-04-23 02:07:47', NULL, '2026-04-15 19:07:47', '2026-04-15 19:07:47'),
+(36, 10, 'peminjaman_approved', 'Peminjaman', 22, 'Disetujui sampai 2026-04-23 02:14:44', NULL, '2026-04-15 19:14:44', '2026-04-15 19:14:44'),
+(37, 10, 'peminjaman_approved', 'Peminjaman', 23, 'Disetujui sampai 2026-04-23 02:42:46', NULL, '2026-04-15 19:42:46', '2026-04-15 19:42:46');
 
 -- --------------------------------------------------------
 
@@ -103,15 +146,16 @@ CREATE TABLE `bukus` (
   `stok` int NOT NULL DEFAULT '0',
   `cover` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `rak_id` bigint UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bukus`
 --
 
-INSERT INTO `bukus` (`id`, `judul`, `pengarang_id`, `penerbit_id`, `kategori_id`, `isbn`, `tahun`, `stok`, `cover`, `created_at`, `updated_at`) VALUES
-(1, 'Buku Biar Kaya', 1, 1, 1, NULL, NULL, 2000, 'cover/wmn6xfiHXn5Q77a3senrawvgdJbKPRFX8as8mMjq.png', '2026-04-13 22:26:06', '2026-04-14 00:09:36');
+INSERT INTO `bukus` (`id`, `judul`, `pengarang_id`, `penerbit_id`, `kategori_id`, `isbn`, `tahun`, `stok`, `cover`, `created_at`, `updated_at`, `rak_id`) VALUES
+(1, 'Buku Biar Kaya', 1, 1, 1, NULL, NULL, 800, 'cover/lGXozhCGS2L8KIivv1j0wdPTWyGSVuY2sD6hCHBM.jpg', '2026-04-13 22:26:06', '2026-04-15 20:01:09', 1);
 
 -- --------------------------------------------------------
 
@@ -136,6 +180,34 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `denda`
+--
+
+CREATE TABLE `denda` (
+  `id` bigint UNSIGNED NOT NULL,
+  `peminjaman_id` bigint UNSIGNED NOT NULL,
+  `hari_terlambat` int NOT NULL,
+  `jumlah_denda` decimal(12,2) NOT NULL,
+  `status` enum('belum_bayar','sudah_bayar') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'belum_bayar',
+  `tanggal_denda` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tanggal_bayar` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `denda`
+--
+
+INSERT INTO `denda` (`id`, `peminjaman_id`, `hari_terlambat`, `jumlah_denda`, `status`, `tanggal_denda`, `tanggal_bayar`, `created_at`, `updated_at`) VALUES
+(1, 10, 7, 34893.49, 'sudah_bayar', '2026-04-16 00:30:42', '2026-04-15 17:30:42', '2026-04-15 17:30:42', '2026-04-15 17:30:42'),
+(2, 11, 7, 34796.27, 'sudah_bayar', '2026-04-16 00:58:42', '2026-04-15 17:58:42', '2026-04-15 17:58:42', '2026-04-15 17:58:42'),
+(3, 22, 6, 30000.00, 'sudah_bayar', '2026-04-16 02:26:42', '2026-04-15 19:26:42', '2026-04-15 19:26:42', '2026-04-15 19:26:42'),
+(4, 23, 11, 55000.00, 'sudah_bayar', '2026-04-16 02:43:33', '2026-04-15 19:43:33', '2026-04-15 19:43:33', '2026-04-15 19:43:33');
 
 -- --------------------------------------------------------
 
@@ -239,7 +311,8 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `nama_kelas`, `created_at`, `updated_at`) VALUES
-(1, 'XII', 'RPL', '12 RPL', '2026-04-13 19:42:03', '2026-04-13 19:42:03');
+(1, 'XII', 'RPL', '12 RPL', '2026-04-13 19:42:03', '2026-04-13 19:42:03'),
+(2, 'XII', 'RPL', 'hh', '2026-04-15 08:06:16', '2026-04-15 08:06:16');
 
 -- --------------------------------------------------------
 
@@ -283,7 +356,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2026_04_14_041451_create_petugas_table', 18),
 (24, '2026_04_14_050346_create_bukus_table', 19),
 (25, '2026_04_14_050536_create_peminjaman_table', 19),
-(26, '2026_04_14_054632_create_peminjaman_table', 20);
+(26, '2026_04_14_054632_create_peminjaman_table', 20),
+(27, '2026_04_15_000001_fix_role_enum_to_anggota', 21),
+(28, '2026_04_15_000002_change_role_enum_to_anggota', 22),
+(29, '2026_04_15_add_tanggal_jatuh_tempo_to_peminjaman', 23),
+(30, '2026_04_15_create_denda_table', 23),
+(31, '2026_04_15_161555_add_action_to_activity_logs_table', 24),
+(32, '2026_04_15_161855_drop_activity_from_activity_logs', 25),
+(33, '2026_04_16_030031_add_rak_id_to_bukus_table', 26);
 
 -- --------------------------------------------------------
 
@@ -308,6 +388,7 @@ CREATE TABLE `peminjaman` (
   `user_id` bigint UNSIGNED NOT NULL,
   `buku_id` bigint UNSIGNED NOT NULL,
   `tanggal_pinjam` datetime DEFAULT NULL,
+  `tanggal_jatuh_tempo` date DEFAULT NULL,
   `tanggal_kembali` datetime DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -318,11 +399,30 @@ CREATE TABLE `peminjaman` (
 -- Dumping data for table `peminjaman`
 --
 
-INSERT INTO `peminjaman` (`id`, `user_id`, `buku_id`, `tanggal_pinjam`, `tanggal_kembali`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '2026-04-14 05:47:25', NULL, 'ditolak', '2026-04-13 22:47:25', '2026-04-13 23:33:08'),
-(2, 2, 1, '2026-04-14 05:47:29', NULL, 'selesai', '2026-04-13 22:47:29', '2026-04-14 00:09:36'),
-(3, 2, 1, '2026-04-14 05:47:32', NULL, 'selesai', '2026-04-13 22:47:32', '2026-04-14 00:05:27'),
-(4, 2, 1, '2026-04-14 06:36:19', NULL, 'ditolak', '2026-04-13 23:36:19', '2026-04-13 23:41:16');
+INSERT INTO `peminjaman` (`id`, `user_id`, `buku_id`, `tanggal_pinjam`, `tanggal_jatuh_tempo`, `tanggal_kembali`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, '2026-04-14 05:47:25', NULL, NULL, 'ditolak', '2026-04-13 22:47:25', '2026-04-13 23:33:08'),
+(2, 2, 1, '2026-04-14 05:47:29', NULL, NULL, 'selesai', '2026-04-13 22:47:29', '2026-04-14 00:09:36'),
+(3, 2, 1, '2026-04-14 05:47:32', NULL, NULL, 'selesai', '2026-04-13 22:47:32', '2026-04-14 00:05:27'),
+(4, 2, 1, '2026-04-14 06:36:19', NULL, NULL, 'ditolak', '2026-04-13 23:36:19', '2026-04-13 23:41:16'),
+(5, 10, 1, '2026-04-15 03:02:13', NULL, NULL, 'selesai', '2026-04-14 20:02:13', '2026-04-15 08:47:10'),
+(6, 10, 1, '2026-04-15 03:15:17', NULL, NULL, 'ditolak', '2026-04-14 20:15:17', '2026-04-15 08:35:48'),
+(7, 10, 1, '2026-04-15 03:18:56', NULL, NULL, 'ditolak', '2026-04-14 20:18:56', '2026-04-15 08:35:45'),
+(8, 10, 1, '2026-04-15 15:46:38', '2026-04-22', '2026-04-15 00:00:00', 'dikembalikan', '2026-04-15 08:46:38', '2026-04-15 09:10:20'),
+(9, 10, 1, '2026-04-15 16:13:33', '2026-04-22', '2026-04-15 00:00:00', 'dikembalikan', '2026-04-15 09:13:33', '2026-04-15 09:21:04'),
+(10, 10, 1, '2026-04-16 00:19:44', '2026-04-23', '2026-04-16 00:00:00', 'dikembalikan', '2026-04-15 17:19:44', '2026-04-15 17:30:42'),
+(11, 10, 1, '2026-04-16 00:29:18', '2026-04-23', '2026-04-16 00:00:00', 'dikembalikan', '2026-04-15 17:29:18', '2026-04-15 17:58:42'),
+(12, 10, 1, '2026-04-16 00:58:07', '2026-04-23', '2026-04-16 01:13:08', 'dikembalikan', '2026-04-15 17:58:07', '2026-04-15 18:13:08'),
+(13, 10, 1, '2026-04-16 01:20:29', '2026-04-23', '2026-04-16 01:22:29', 'dikembalikan', '2026-04-15 18:15:15', '2026-04-15 18:22:29'),
+(14, 10, 1, '2026-04-16 01:24:38', '2026-04-23', '2026-04-16 01:25:31', 'dikembalikan', '2026-04-15 18:24:24', '2026-04-15 18:25:31'),
+(15, 10, 1, '2026-04-16 01:32:14', '2026-04-23', '2026-04-16 01:34:56', 'dikembalikan', '2026-04-15 18:30:05', '2026-04-15 18:34:56'),
+(16, 10, 1, '2026-04-16 01:35:04', '2026-04-23', '2026-04-16 01:46:15', 'dikembalikan', '2026-04-15 18:34:25', '2026-04-15 18:46:15'),
+(17, 10, 1, '2026-04-16 01:52:52', '2026-04-23', '2026-04-16 01:53:31', 'dikembalikan', '2026-04-15 18:52:30', '2026-04-15 18:53:31'),
+(18, 10, 1, '2025-06-16 01:55:13', '2026-03-23', '2026-04-16 01:57:51', 'dikembalikan\r\n\r\n', '2026-04-15 18:55:02', '2026-04-15 18:57:51'),
+(19, 10, 1, '2025-04-16 02:02:27', '2025-01-23', '2026-04-16 02:03:31', 'dikembalikan', '2026-04-15 19:02:20', '2026-04-15 19:03:31'),
+(20, 10, 1, '2026-04-16 02:07:12', '2026-04-23', '2026-04-16 02:07:29', 'dikembalikan', '2026-04-15 19:06:55', '2026-04-15 19:07:29'),
+(22, 10, 1, '2026-04-16 02:14:44', '2026-04-10', '2026-04-16 02:26:42', 'dikembalikan', '2026-04-15 19:14:36', '2026-04-15 19:26:42'),
+(23, 10, 1, '2026-04-16 02:42:46', '2026-04-05', '2026-04-16 02:43:33', 'dikembalikan', '2026-04-15 19:42:38', '2026-04-15 19:43:33'),
+(24, 10, 1, NULL, NULL, NULL, 'pending', '2026-04-15 20:50:23', '2026-04-15 20:50:23');
 
 -- --------------------------------------------------------
 
@@ -371,7 +471,8 @@ CREATE TABLE `pengarangs` (
 --
 
 INSERT INTO `pengarangs` (`id`, `nama`, `email`, `telepon`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'Yana', 'yana@gmail.com', '093482384', 'Antapani Lama', '2026-04-13 19:31:19', '2026-04-13 19:31:19');
+(1, 'Yana', 'yana@gmail.com', '093482384', 'Antapani Lama', '2026-04-13 19:31:19', '2026-04-13 19:31:19'),
+(2, 'Alibama', 'alibama@gmail.com', '085634343', 'antapni', '2026-04-15 19:27:11', '2026-04-15 19:27:22');
 
 -- --------------------------------------------------------
 
@@ -426,6 +527,13 @@ CREATE TABLE `raks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `raks`
+--
+
+INSERT INTO `raks` (`id`, `kode_rak`, `nama_rak`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 'A1', 'Rak Sejarah', NULL, '2026-04-15 19:58:49', '2026-04-15 19:58:49');
+
 -- --------------------------------------------------------
 
 --
@@ -459,7 +567,7 @@ CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` enum('admin','petugas','anggota') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('admin','petugas','anggota') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'anggota',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -478,10 +586,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `role`, `email_verified_at`, `passwo
 (2, 'adminukk', 'admin@ukk2026.com', 'admin', NULL, '$2y$12$sCo6l0wsVhInTwYgc.sm1OP1SIGE4vCbYxhLoqYKTqqI2qG5I.O5y', NULL, '2026-04-08 02:48:48', '2026-04-08 02:48:48', NULL, NULL),
 (3, 'Daveiz Alibama', 'daveiz@gmail.com', 'anggota', NULL, '$2y$12$XoH7M6Ia.noBV2oAgHxKR.7QZtNrnHH6NBnkZnhGxIHoLS4ldvmMK', NULL, '2026-04-12 21:16:33', '2026-04-12 21:16:33', NULL, NULL),
 (4, 'Deril', 'deril@gmail.com', 'anggota', NULL, '$2y$12$eEBuOzB8LbElhsZa4AJcueUJTHPaN0MSBwqje7hojKkxtkM9Os4tq', NULL, '2026-04-13 19:55:45', '2026-04-13 19:55:45', NULL, NULL),
-(5, 'admin', 'sdasdasd@ekmkef.com', 'admin', NULL, '$2y$12$b66todTh9jzMx11fyIljZuR/uvXUgSgQPMlKsNQ7bdDFJ61gVIsDC', NULL, '2026-04-13 20:52:16', '2026-04-13 20:52:16', NULL, NULL),
-(6, 'dapes', 'dapes@gmail.com', 'admin', NULL, '$2y$12$15BWqomzw.HmXNt4LCbXwutL9sk4YEVrJl3BwyfM7qcS0TEfN/HFy', NULL, '2026-04-13 21:06:00', '2026-04-13 21:06:00', NULL, NULL),
-(7, 'adminukk', 'adminukk@gmail.com', 'admin', NULL, '$2y$12$h6BPvGie4zWtLUFljcLaXOWQ4TU18NDOlMy0EmPbWQ2MwjEBGzy0S', NULL, '2026-04-13 21:07:48', '2026-04-13 21:08:03', NULL, NULL),
-(8, 'petugasukk', 'petugas@ukk2026.com', 'petugas', NULL, '$2y$12$aVKiIIU6Pj3kS/MRza5UR.90.htfboIymRStjFvlkuZVg2vpp.kYu', NULL, '2026-04-13 21:21:19', '2026-04-13 21:21:19', NULL, NULL);
+(5, 'admin', 'sdasdasd@ekmkef.com', 'anggota', NULL, '$2y$12$b66todTh9jzMx11fyIljZuR/uvXUgSgQPMlKsNQ7bdDFJ61gVIsDC', NULL, '2026-04-13 20:52:16', '2026-04-13 20:52:16', NULL, NULL),
+(6, 'dapes', 'dapes@gmail.com', 'anggota', NULL, '$2y$12$15BWqomzw.HmXNt4LCbXwutL9sk4YEVrJl3BwyfM7qcS0TEfN/HFy', NULL, '2026-04-13 21:06:00', '2026-04-13 21:06:00', NULL, NULL),
+(7, 'adminukk', 'adminukk@gmail.com', 'anggota', NULL, '$2y$12$h6BPvGie4zWtLUFljcLaXOWQ4TU18NDOlMy0EmPbWQ2MwjEBGzy0S', NULL, '2026-04-13 21:07:48', '2026-04-13 21:08:03', NULL, NULL),
+(8, 'petugasukk', 'petugas@ukk2026.com', 'anggota', NULL, '$2y$12$aVKiIIU6Pj3kS/MRza5UR.90.htfboIymRStjFvlkuZVg2vpp.kYu', NULL, '2026-04-13 21:21:19', '2026-04-13 21:21:19', NULL, NULL),
+(9, 'petugasukk', 'petugas@gmail.com', 'petugas', NULL, '$2y$12$NPwd.q3BE2el1UaQbjajXOACD98eGgkeYaDzkQdksKoHYN5o4vZm6', NULL, '2026-04-14 18:21:19', '2026-04-14 18:21:19', NULL, NULL),
+(10, 'siswa', 'siswa@gmail.com', 'anggota', NULL, '$2y$12$5CxLqw.IBps11L1i630Qje49De5rOfRoXXZqduwnWey7kDc2vUZNa', NULL, '2026-04-14 19:09:09', '2026-04-14 19:09:09', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -518,7 +628,8 @@ ALTER TABLE `bukus`
   ADD PRIMARY KEY (`id`),
   ADD KEY `bukus_pengarang_id_foreign` (`pengarang_id`),
   ADD KEY `bukus_penerbit_id_foreign` (`penerbit_id`),
-  ADD KEY `bukus_kategori_id_foreign` (`kategori_id`);
+  ADD KEY `bukus_kategori_id_foreign` (`kategori_id`),
+  ADD KEY `bukus_rak_id_foreign` (`rak_id`);
 
 --
 -- Indexes for table `cache`
@@ -533,6 +644,13 @@ ALTER TABLE `cache`
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`),
   ADD KEY `cache_locks_expiration_index` (`expiration`);
+
+--
+-- Indexes for table `denda`
+--
+ALTER TABLE `denda`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `denda_peminjaman_id_foreign` (`peminjaman_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -644,7 +762,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -663,6 +781,12 @@ ALTER TABLE `anggotas`
 --
 ALTER TABLE `bukus`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `denda`
+--
+ALTER TABLE `denda`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -686,19 +810,19 @@ ALTER TABLE `kategoris`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `penerbits`
@@ -710,7 +834,7 @@ ALTER TABLE `penerbits`
 -- AUTO_INCREMENT for table `pengarangs`
 --
 ALTER TABLE `pengarangs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pengembalian`
@@ -728,13 +852,13 @@ ALTER TABLE `petugas`
 -- AUTO_INCREMENT for table `raks`
 --
 ALTER TABLE `raks`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -765,7 +889,14 @@ ALTER TABLE `anggotas`
 ALTER TABLE `bukus`
   ADD CONSTRAINT `bukus_kategori_id_foreign` FOREIGN KEY (`kategori_id`) REFERENCES `kategoris` (`id`),
   ADD CONSTRAINT `bukus_penerbit_id_foreign` FOREIGN KEY (`penerbit_id`) REFERENCES `penerbits` (`id`),
-  ADD CONSTRAINT `bukus_pengarang_id_foreign` FOREIGN KEY (`pengarang_id`) REFERENCES `pengarangs` (`id`);
+  ADD CONSTRAINT `bukus_pengarang_id_foreign` FOREIGN KEY (`pengarang_id`) REFERENCES `pengarangs` (`id`),
+  ADD CONSTRAINT `bukus_rak_id_foreign` FOREIGN KEY (`rak_id`) REFERENCES `raks` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `denda`
+--
+ALTER TABLE `denda`
+  ADD CONSTRAINT `denda_peminjaman_id_foreign` FOREIGN KEY (`peminjaman_id`) REFERENCES `peminjaman` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `peminjaman`
