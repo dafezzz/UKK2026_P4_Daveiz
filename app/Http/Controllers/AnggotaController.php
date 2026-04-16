@@ -12,7 +12,7 @@ class AnggotaController extends Controller
 {
     public function index()
     {
-        $anggotas = Anggota::with(['user','kelas'])->latest()->get();
+        $anggotas = Anggota::with(['user', 'kelas'])->latest()->get();
         return view('anggota.index', compact('anggotas'));
     }
 
@@ -46,7 +46,7 @@ class AnggotaController extends Controller
         ]);
 
         return redirect()->route('anggota.index')
-            ->with('success','Berhasil tambah');
+            ->with('success', 'Berhasil tambah');
     }
 
     public function edit($id)
@@ -54,7 +54,7 @@ class AnggotaController extends Controller
         $anggota = Anggota::with('user')->findOrFail($id);
         $kelas = Kelas::all();
 
-        return view('anggota.edit', compact('anggota','kelas'));
+        return view('anggota.edit', compact('anggota', 'kelas'));
     }
 
     public function update(Request $request, $id)
@@ -79,7 +79,7 @@ class AnggotaController extends Controller
         ]);
 
         return redirect()->route('anggota.index')
-            ->with('success','Berhasil update');
+            ->with('success', 'Berhasil update');
     }
 
     public function destroy($id)
@@ -87,6 +87,6 @@ class AnggotaController extends Controller
         $anggota = Anggota::findOrFail($id);
         $anggota->user->delete();
 
-        return back()->with('success','Berhasil hapus');
+        return back()->with('success', 'Berhasil hapus');
     }
 }

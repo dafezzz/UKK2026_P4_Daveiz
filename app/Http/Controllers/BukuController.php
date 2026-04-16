@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Models\Pengarang;
 use App\Models\Penerbit;
 use App\Models\Kategori;
+use App\Models\Rak;
 use Illuminate\Http\Request;
 
 class BukuController extends Controller
@@ -13,9 +14,9 @@ class BukuController extends Controller
     // ================= ADMIN =================
     public function index()
     {
-        $bukus = Buku::with(['pengarang','penerbit','kategori'])
-                    ->latest()
-                    ->get();
+        $bukus = Buku::with(['pengarang', 'penerbit', 'kategori', 'rak'])
+            ->latest()
+            ->get();
 
         return view('buku.index', compact('bukus'));
     }
@@ -26,6 +27,7 @@ class BukuController extends Controller
             'pengarangs' => Pengarang::all(),
             'penerbits' => Penerbit::all(),
             'kategoris' => Kategori::all(),
+            'raks' => Rak::all(),
         ]);
     }
 
@@ -37,6 +39,7 @@ class BukuController extends Controller
             'penerbit_id' => 'required',
             'kategori_id' => 'required',
             'stok' => 'required|integer|min:0',
+            'rak_id' => 'nullable|exists:raks,id',
             'cover' => 'nullable|image|max:2048'
         ]);
 
@@ -62,6 +65,7 @@ class BukuController extends Controller
             'pengarangs' => Pengarang::all(),
             'penerbits' => Penerbit::all(),
             'kategoris' => Kategori::all(),
+            'raks' => Rak::all(),
         ]);
     }
 
@@ -75,6 +79,7 @@ class BukuController extends Controller
             'penerbit_id' => 'required',
             'kategori_id' => 'required',
             'stok' => 'required|integer|min:0',
+            'rak_id' => 'nullable|exists:raks,id',
             'cover' => 'nullable|image|max:2048'
         ]);
 
@@ -101,7 +106,7 @@ class BukuController extends Controller
     // ================= USER =================
     public function katalogUser(Request $request)
     {
-        $query = Buku::with(['pengarang', 'kategori']);
+        $query = Buku::with(['pengarang', 'penerbit', 'kategori', 'rak']);
 
         // 🔍 search judul
         if ($request->filled('search')) {
@@ -122,7 +127,7 @@ class BukuController extends Controller
 
     public function showUser($id)
     {
-        $buku = Buku::with(['pengarang','kategori'])->findOrFail($id);
+        $buku = Buku::with(['pengarang', 'penerbit', 'kategori', 'rak'])->findOrFail($id);
 
         return view('user.detail-buku', compact('buku'));
     }

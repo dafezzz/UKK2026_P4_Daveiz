@@ -11,22 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin','petugas','anggota'])
-                  ->default('anggota')
-                  ->after('email');
-
-            $table->text('alamat')->nullable();
-            $table->string('telp')->nullable();
+        Schema::table('bukus', function (Blueprint $table) {
+            $table->foreignId('rak_id')->nullable()->constrained('raks')->nullOnDelete();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('bukus', function (Blueprint $table) {
+            $table->dropForeignKeyIfExists(['rak_id']);
+            $table->dropColumn('rak_id');
         });
     }
 };

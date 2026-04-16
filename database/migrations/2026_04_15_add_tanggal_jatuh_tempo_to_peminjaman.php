@@ -11,22 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin','petugas','anggota'])
-                  ->default('anggota')
-                  ->after('email');
-
-            $table->text('alamat')->nullable();
-            $table->string('telp')->nullable();
+        Schema::table('peminjaman', function (Blueprint $table) {
+            $table->date('tanggal_jatuh_tempo')->nullable()->after('tanggal_pinjam');
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('peminjaman', function (Blueprint $table) {
+            $table->dropColumn('tanggal_jatuh_tempo');
         });
     }
 };

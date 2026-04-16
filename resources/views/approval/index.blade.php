@@ -121,16 +121,19 @@
     <div class="modal-content border-0 shadow rounded-3">
 
       <div class="modal-header border-0">
-        <h6 class="modal-title fw-semibold">Denda Keterlambatan</h6>
+        <h6 class="modal-title fw-semibold">⚠️ Denda Keterlambatan</h6>
       </div>
 
       <div class="modal-body pt-0">
         <div class="bg-light rounded p-3 small">
             <div class="mb-1">
-                Terlambat: <strong id="hari"></strong> hari
+                📅 Terlambat: <strong id="hari" class="text-danger"></strong> hari
             </div>
             <div>
-                Denda: <strong class="text-danger" id="denda"></strong>
+                💰 Denda: <strong id="denda" class="text-danger"></strong>
+            </div>
+            <div class="mt-2 text-muted">
+                Rp 5.000 per hari
             </div>
         </div>
       </div>
@@ -142,7 +145,9 @@
 
         <form method="POST" id="formSelesai">
             @csrf
-            <button class="btn btn-success btn-sm px-3">
+            <input type="hidden" name="hari_terlambat" id="inputHari">
+            <input type="hidden" name="jumlah_denda" id="inputDenda">
+            <button type="submit" class="btn btn-success btn-sm px-3">
                 Bayar & Selesai
             </button>
         </form>
@@ -162,28 +167,40 @@ document.querySelectorAll('.btn-konfirmasi').forEach(btn => {
         fetch(`/approval/${id}/konfirmasi`, {
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json'
             }
         })
         .then(res => res.json())
         .then(res => {
 
-            if(res.success){
-                location.reload();
-            }else{
-                document.getElementById('hari').innerText = res.telat;
-                document.getElementById('denda').innerText = 'Rp ' + res.denda;
+            if(res.success && !res.has_denda){
+                Swal.fire('Sukses', 'Pengembalian selesai tanpa denda', 'success')
+                    .then(() => location.reload());
+            }else if(res.has_denda){
+                // Ada denda - tampilkan modal
+                document.getElementById('hari').innerText = res.hari_terlambat;
+                document.getElementById('denda').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(res.jumlah_denda);
+                
+                // Set input values
+                document.getElementById('inputHari').value = res.hari_terlambat;
+                document.getElementById('inputDenda').value = res.jumlah_denda;
 
-                document.getElementById('formSelesai').action = `/approval/${id}/selesai`;
+                document.getElementById('formSelesai').action = `/approval/${res.peminjaman_id}/selesai`;
 
                 new bootstrap.Modal(document.getElementById('modalDenda')).show();
             }
 
+        })
+        .catch(err => {
+            Swal.fire('Error', 'Terjadi kesalahan', 'error');
+            console.error(err);
         });
 
     });
 });
 </script>
+
 
 <style>
 

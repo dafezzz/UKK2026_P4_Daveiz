@@ -34,6 +34,13 @@
     @endforeach
 </select>
 
+<select name="rak_id" class="form-control mb-2">
+    <option value="" selected>Pilih Rak (Opsional)</option>
+    @foreach($raks as $r)
+        <option value="{{ $r->id }}">{{ $r->kode_rak }} - {{ $r->nama_rak }}</option>
+    @endforeach
+</select>
+
 <input type="number" name="stok" class="form-control mb-2" placeholder="Stok">
 
 <input type="file" name="cover" class="form-control mb-3">

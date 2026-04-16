@@ -4,41 +4,52 @@
 
 <style>
 body {
-    background: #f1f5f9;
+    background: #eef2f7;
+    color: #0f172a;
     font-family: 'Segoe UI', sans-serif;
 }
 
 /* CONTAINER */
 .container {
     max-width: 1200px !important;
+    background: transparent;
 }
 
 /* NAVBAR */
 .navbar-custom {
-    background: white;
+    background: #ffffff;
     padding: 14px 28px;
     border-radius: 16px;
     margin-bottom: 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    box-shadow: 0 6px 20px rgba(15,23,42,0.08);
 }
 
 /* 🔥 HERO JADI GAMBAR */
+.hero-img {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+}
+
 .hero-img img {
+    width: 100%;
     height: 280px;
     object-fit: cover;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border-radius: 14px;
 }
 
 /* SIDEBAR */
 .card {
+    background: #ffffff !important;
+    border: 1px solid rgba(15,23,42,0.08) !important;
     border-radius: 16px !important;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.06) !important;
+    box-shadow: 0 10px 28px rgba(15,23,42,0.06) !important;
 }
 
 .kategori-list li {
-    padding: 10px 12px;
-    border-radius: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
     transition: 0.2s;
     font-size: 14px;
 }
@@ -55,16 +66,18 @@ body {
 
 /* SEARCH */
 .search-card {
-    background: white;
+    background: #ffffff;
+    border: 1px solid rgba(15,23,42,0.08);
     border-radius: 16px;
-    padding: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    padding: 18px;
+    box-shadow: 0 10px 28px rgba(15,23,42,0.06);
 }
 
 /* INPUT */
 .form-control {
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
 }
 
 /* GRID */
@@ -82,6 +95,8 @@ body {
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(0,0,0,0.06);
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .book-card:hover {
@@ -99,6 +114,9 @@ body {
 /* BODY */
 .book-body {
     padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .book-title {
@@ -107,17 +125,53 @@ body {
     line-height: 1.4;
     height: 38px;
     overflow: hidden;
+    margin-bottom: 8px;
 }
 
 .book-meta {
     font-size: 12px;
     color: #6b7280;
+    margin-bottom: 8px;
+}
+
+/* BADGE */
+.badge {
+    font-size: 11px;
+    padding: 4px 8px;
+}
+
+/* BUTTONS */
+.btn-sm {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.d-grid .btn {
+    margin-bottom: 4px;
+}
+
+.d-grid .btn:last-child {
+    margin-bottom: 0;
 }
 </style>
 
 <div class="container py-3">
 
-  
+    <!-- ALERT MESSAGES -->
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>✅ Sukses!</strong> {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>❌ Error!</strong> {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    @endif
 
     <!-- 🔥 HERO GAMBAR -->
     <div class="hero-img mb-4">
@@ -130,19 +184,19 @@ body {
         <div class="col-md-3">
             <div class="card border-0 p-3">
 
-                <h6 class="fw-bold mb-3">📂 Kategori</h6>
+                <h6 class="fw-bold mb-3"> Kategori</h6>
 
                 <ul class="list-unstyled kategori-list">
 
                     <li class="{{ request('kategori') ? '' : 'active' }}">
-                        <a href="{{ route('katalog.user') }}" class="text-dark text-decoration-none">
+                        <a href="{{ route('katalog.user', request()->except('kategori')) }}" class="d-block text-dark text-decoration-none">
                             Semua Buku
                         </a>
                     </li>
 
                     @foreach($kategori as $k)
                     <li class="{{ request('kategori') == $k->id ? 'active' : '' }}">
-                        <a href="{{ route('katalog.user', ['kategori' => $k->id]) }}" class="text-dark text-decoration-none">
+                        <a href="{{ route('katalog.user', array_merge(request()->query(), ['kategori' => $k->id])) }}" class="d-block text-dark text-decoration-none">
                             {{ $k->nama }}
                         </a>
                     </li>
@@ -165,6 +219,10 @@ body {
                     value="{{ request('search') }}"
                     class="form-control" 
                     placeholder="Cari judul buku...">
+
+                @if(request('kategori'))
+                    <input type="hidden" name="kategori" value="{{ request('kategori') }}">
+                @endif
 
                 <button class="btn btn-primary px-4">Cari</button>
 
@@ -189,23 +247,50 @@ body {
                 @forelse($buku as $b)
                 <div class="col-md-3 col-sm-6">
 
-                    <a href="{{ route('buku.user.detail', $b->id) }}" class="text-decoration-none text-dark">
-                        <div class="book-card">
+                    <div class="book-card">
 
-                            <img 
-                                src="{{ $b->cover ? asset('storage/'.$b->cover) : 'https://via.placeholder.com/300x400' }}" 
-                                class="book-img">
+                        <img
+                            src="{{ $b->cover ? asset('storage/'.$b->cover) : 'https://via.placeholder.com/300x400' }}"
+                            class="book-img">
 
-                            <div class="book-body">
-                                <div class="book-title">{{ $b->judul }}</div>
+                        <div class="book-body">
+                            <div class="book-title">{{ $b->judul }}</div>
 
-                                <div class="book-meta">
-                                    {{ $b->pengarang->nama ?? '-' }}
-                                </div>
+                            <div class="book-meta mb-2">
+                          <small class="text-muted d-block" style="line-height: 1.6;">
+    <div><span class="fw-semibold text-dark">Pengarang</span> : {{ $b->pengarang->nama ?? '-' }}</div>
+    <div><span class="fw-semibold text-dark">Penerbit</span> : {{ $b->penerbit->nama ?? '-' }}</div>
+    <div><span class="fw-semibold text-dark">Kategori</span> : {{ $b->kategori->nama ?? '-' }}</div>
+    @if($b->rak)
+    <div><span class="fw-semibold text-dark">Lokasi Rak</span> : {{ $b->rak->kode_rak }}</div>
+    @endif
+</small>
                             </div>
 
+                            <!-- STATUS STOK -->
+                            <div class="mb-2">
+                                @if($b->stok > 0)
+                                    <span class="badge bg-success">✅ Tersedia ({{ $b->stok }})</span>
+                                @else
+                                    <span class="badge bg-danger">❌ Stok Habis</span>
+                                @endif
+                            </div>
+
+                            <!-- ACTION BUTTONS -->
+                            <div class="d-grid gap-1">
+                                @if($b->stok > 0)
+                                <button type="button" class="btn btn-success btn-sm w-100"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#ajukanPinjamModal"
+                                        data-buku-id="{{ $b->id }}"
+                                        data-buku-judul="{{ $b->judul }}">
+                                    Ajukan Peminjaman
+                                </button>
+                                @endif
+                            </div>
                         </div>
-                    </a>
+
+                    </div>
 
                 </div>
                 @empty
@@ -214,6 +299,30 @@ body {
                 </div>
                 @endforelse
 
+            </div>
+
+            <!-- MODAL AJUKAN PINJAM -->
+            <div class="modal fade" id="ajukanPinjamModal" tabindex="-1" aria-labelledby="ajukanPinjamModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ajukanPinjamModalLabel">Ajukan Peminjaman</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('peminjaman.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="buku_id" id="modalBukuId" value="">
+                            <div class="modal-body">
+                                <p>Apakah kamu yakin ingin mengajukan peminjaman buku:</p>
+                                <p class="fw-bold" id="modalBukuJudul"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success">Ajukan Pinjam</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <!-- PAGINATION -->
@@ -226,5 +335,22 @@ body {
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ajukanModal = document.getElementById('ajukanPinjamModal');
+
+        if (!ajukanModal) return;
+
+        ajukanModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var bukuId = button.getAttribute('data-buku-id');
+            var bukuJudul = button.getAttribute('data-buku-judul');
+
+            ajukanModal.querySelector('#modalBukuId').value = bukuId;
+            ajukanModal.querySelector('#modalBukuJudul').textContent = bukuJudul;
+        });
+    });
+</script>
 
 @endsection

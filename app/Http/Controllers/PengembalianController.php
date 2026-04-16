@@ -9,7 +9,6 @@ class PengembalianController extends Controller
 {
     public function index()
     {
-        // tampilkan yg dipinjam + yg lagi diajukan pengembalian
         $data = Peminjaman::with('buku.pengarang')
             ->where('user_id', Auth::id())
             ->whereIn('status', ['dipinjam', 'pengembalian'])
@@ -25,9 +24,8 @@ class PengembalianController extends Controller
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
-        // cegah double klik
         if ($pinjam->status == 'pengembalian') {
-            return back()->with('error', 'Sudah diajukan sebelumnya');
+            return back()->with('error', 'Sudah diajukan');
         }
 
         $pinjam->update([

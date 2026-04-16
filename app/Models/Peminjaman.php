@@ -15,6 +15,7 @@ class Peminjaman extends Model
         'user_id',
         'buku_id',
         'tanggal_pinjam',
+        'tanggal_jatuh_tempo',
         'tanggal_kembali',
         'status'
     ];
@@ -28,5 +29,35 @@ class Peminjaman extends Model
     public function buku()
     {
         return $this->belongsTo(Buku::class);
+    }
+
+    public function denda()
+    {
+        return $this->hasOne(Denda::class);
+    }
+
+    // Aksesor untuk hitung denda jika terlambat
+    public function hitungDenda()
+    {
+        if (!$this->tanggal_jatuh_tempo) {
+            return 0;
+        }
+
+        $terlambat = now()->diffInDays($this->tanggal_jatuh_tempo, false);
+        
+        if ($terlambat <= 0) {
+            return 0;
+        }
+
+        return $terlambat * 5000; // Rp 5.000 per hari
+    }
+
+    public function isTerlambat()
+    {
+        if (!$this->tanggal_jatuh_tempo) {
+            return false;
+        }
+
+        return now()->gt($this->tanggal_jatuh_tempo);
     }
 }

@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h5 class="fw-semibold mb-0 text-dark">Buku</h5>
-            <small class="text-muted">Katalog & pengajuan peminjaman buku</small>
+            <small class="text-muted">Kelola data buku</small>
         </div>
 
         <a href="{{ route('buku.create') }}" class="btn btn-primary btn-sm px-3">
@@ -54,6 +54,9 @@
                         <div><span>Pengarang</span> {{ $b->pengarang->nama ?? '-' }}</div>
                         <div><span>Penerbit</span> {{ $b->penerbit->nama ?? '-' }}</div>
                         <div><span>Kategori</span> {{ $b->kategori->nama ?? '-' }}</div>
+                        @if($b->rak)
+                        <div><span>Rak</span> {{ $b->rak->kode_rak }} ({{ $b->rak->nama_rak }})</div>
+                        @endif
                     </div>
 
                     <!-- STOK -->
@@ -70,26 +73,21 @@
 
                     <div class="d-flex gap-2">
 
-                        <!-- AJUKAN -->
-                        @if($b->stok > 0)
-                        <form action="{{ route('peminjaman.store') }}" method="POST" class="w-100">
-                            @csrf
-                            <input type="hidden" name="buku_id" value="{{ $b->id }}">
-                            <button class="btn btn-primary btn-sm w-100">
-                                Ajukan
-                            </button>
-                        </form>
-                        @else
-                            <button class="btn btn-secondary btn-sm w-100" disabled>
-                                Tidak tersedia
-                            </button>
-                        @endif
-
                         <!-- EDIT -->
                         <a href="{{ route('buku.edit',$b->id) }}"
-                           class="btn btn-outline-secondary btn-sm w-100">
+                           class="btn btn-outline-primary btn-sm w-100">
                             Edit
                         </a>
+
+                        <!-- DELETE -->
+                        <form action="{{ route('buku.destroy',$b->id) }}" method="POST" class="w-100"
+                              onsubmit="return confirm('Yakin hapus buku ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-outline-danger btn-sm w-100">
+                                Hapus
+                            </button>
+                        </form>
 
                     </div>
 

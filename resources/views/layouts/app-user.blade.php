@@ -5,9 +5,11 @@
     <title>Perpustakaan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
         body {
             background: #f1f5f9;
@@ -97,8 +99,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('riwayat*') ? 'active' : '' }}" 
-                       href="{{ route('riwayat.user') }}">
-                        Riwayat
+                       href="{{ route('riwayat.mine') }}">
+                        Riwayat 
                     </a>
                 </li>
 
@@ -106,6 +108,13 @@
                     <a class="nav-link {{ request()->is('pengembalian*') ? 'active' : '' }}" 
                        href="{{ route('pengembalian.user') }}">
                         Pengembalian
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('denda*') ? 'active' : '' }}" 
+                       href="{{ route('denda.mine') }}">
+                         Denda
                     </a>
                 </li>
 
@@ -134,10 +143,11 @@
 
 <!-- FOOTER -->
 <div class="footer">
-    © {{ date('Y') }} Perpustakaan Digital • Laravel System
+    © {{ date('Y') }} Perpustakaan Digital • Daveiz
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
+

@@ -12,21 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin','petugas','anggota'])
+            $table->enum('role', ['admin', 'petugas', 'anggota'])
                   ->default('anggota')
-                  ->after('email');
-
-            $table->text('alamat')->nullable();
-            $table->string('telp')->nullable();
+                  ->change();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->enum('role', ['admin', 'petugas', 'member'])
+                  ->default('member')
+                  ->change();
         });
     }
 };

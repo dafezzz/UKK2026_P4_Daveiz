@@ -57,6 +57,13 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('rak.index') }}">
+            <i class="fas fa-layer-group"></i>
+            <span>Rak Buku</span>
+        </a>
+    </li>
+
     <div class="sidebar-heading">Manajemen User</div>
 
     <li class="nav-item">
@@ -104,15 +111,35 @@
         </a>
     </li>
 
-    {{-- 🔥 pengembalian hanya admin --}}
-    @if($role == 'admin')
+      {{-- @if($role == 'admin')
     <li class="nav-item">
         <a class="nav-link" href="{{ route('pengembalian.index') }}">
             <i class="fas fa-undo"></i>
             <span>Pengembalian Buku</span>
         </a>
     </li>
-    @endif
+    @endif --}}
+
+      
+
+<div class="sidebar-heading">Aktivitas Transaksi</div>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('riwayat.admin') }}">
+            <i class="fas fa-history"></i>
+            <span>Riwayat transaksi</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('denda.semua') }}">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Riwayat Denda</span>
+        </a>
+    </li>
+
+  
+
+  
 
     @endif
 

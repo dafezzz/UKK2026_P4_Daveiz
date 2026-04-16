@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
 class ActivityLog extends Model
 {
@@ -11,11 +10,16 @@ class ActivityLog extends Model
 
     protected $fillable = [
         'user_id',
-        'activity',
+        'action',
+        'description',
         'model',
         'model_id',
-        'description',
+        'activity',
         'ip_address'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
     ];
 
     // 🔥 RELASI

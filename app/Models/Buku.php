@@ -17,7 +17,8 @@ class Buku extends Model
         'isbn',
         'tahun',
         'stok',
-        'cover'
+        'cover',
+        'rak_id'
     ];
 
     //  RELASI
@@ -34,6 +35,11 @@ class Buku extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
+    }
+
+    public function rak()
+    {
+        return $this->belongsTo(Rak::class);
     }
 
     public function peminjaman()

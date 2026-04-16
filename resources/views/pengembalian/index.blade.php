@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@php
+    $layout = auth()->user()->role === 'anggota' ? 'layouts.app-user' : 'layouts.app';
+@endphp
+
+@extends($layout)
 
 @section('content')
 <div class="container-fluid">
@@ -38,7 +42,7 @@
                     @if($d->status == 'dipinjam')
                         <span class="badge status-badge bg-primary">Dipinjam</span>
                     @elseif($d->status == 'pengembalian')
-                        <span class="badge status-badge bg-warning text-dark">Menunggu</span>
+                        <span class="badge status-badge bg-warning text-dark">Pending</span>
                     @endif
                 </div>
 
@@ -55,11 +59,13 @@
                         <div><span>Tempo</span> {{ $d->tanggal_jatuh_tempo ?? '-' }}</div>
                     </div>
 
-                    @php
-                        $telat = $d->tanggal_jatuh_tempo 
-                            ? \Carbon\Carbon::now()->diffInDays($d->tanggal_jatuh_tempo, false)
-                            : 0;
-                    @endphp
+                 @php
+    $telat = 0;
+
+    if ($d->tanggal_jatuh_tempo && now()->gt($d->tanggal_jatuh_tempo)) {
+        $telat = now()->diffInDays($d->tanggal_jatuh_tempo);
+    }
+           @endphp
 
                     @if($telat > 0 && $d->status == 'dipinjam')
                         <div class="late-box mt-3">
@@ -73,12 +79,20 @@
                 <div class="card-footer bg-white border-0 pt-0">
 
                     @if($d->status == 'dipinjam')
-                        <form action="{{ route('pengembalian.store',$d->id) }}" method="POST">
+
+                        @php
+                            $routePengembalian = auth()->user()->role === 'anggota'
+                                ? route('pengembalian.user.store', $d->id)
+                                : route('pengembalian.store', $d->id);
+                        @endphp
+
+                        <form action="{{ $routePengembalian }}" method="POST">
                             @csrf
                             <button class="btn btn-warning btn-sm w-100">
                                 Ajukan Pengembalian
                             </button>
                         </form>
+
                     @else
                         <button class="btn btn-secondary btn-sm w-100" disabled>
                             Menunggu Konfirmasi
