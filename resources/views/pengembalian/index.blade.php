@@ -35,7 +35,7 @@
 
                 <!-- COVER -->
                 <div class="book-cover position-relative">
-                    <img src="{{ $d->buku->cover ? asset('storage/'.$d->buku->cover) : 'https://via.placeholder.com/300x200' }}"
+                    <img src="{{ $d->buku->cover ? asset('images/'.$d->buku->cover) : 'https://via.placeholder.com/300x200' }}"
                          class="cover-img">
 
                     <!-- STATUS BADGE -->

@@ -280,7 +280,7 @@ body {
     <div class="book-scroll">
         @foreach($buku as $b)
         <div class="book-card">
-            <img src="{{ $b->cover ? asset('storage/'.$b->cover) : 'https://via.placeholder.com/200x250' }}" class="w-100 book-img">
+            <img src="{{ $b->cover ? asset('images/'.$b->cover) : 'https://via.placeholder.com/200x250' }}" class="w-100 book-img">
             <div class="book-body">
                 <div class="book-title">{{ $b->judul }}</div>
             </div>
@@ -296,7 +296,7 @@ body {
     <div class="book-scroll">
         @foreach($populer as $b)
         <div class="book-card">
-            <img src="{{ $b->cover ? asset('storage/'.$b->cover) : 'https://via.placeholder.com/200x250' }}" class="w-100 book-img">
+            <img src="{{ $b->cover ? asset('images/'.$b->cover) : 'https://via.placeholder.com/200x250' }}" class="w-100 book-img">
             <div class="book-body">
                 <div class="book-title">{{ $b->judul }}</div>
                 <div class="book-meta">{{ $b->peminjaman_count }} kali dipinjam</div>
