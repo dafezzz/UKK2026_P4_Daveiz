@@ -40,68 +40,100 @@
     </style>
 </head>
 <body>
-    <h2>LAPORAN PERPUSTAKAAN</h2>
+    <h2>{{ ($exportType ?? 'all') === 'denda' ? 'LAPORAN DENDA' : 'LAPORAN PERPUSTAKAAN' }}</h2>
 
     <div class="meta">
         <div>Periode: {{ $startDate->format('d-m-Y') }} s/d {{ $endDate->format('d-m-Y') }}</div>
         <div>Tanggal Cetak: {{ $printedAt->format('d-m-Y H:i:s') }}</div>
     </div>
 
-    <div class="section-title">Data Peminjaman</div>
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 5%;">No</th>
-                <th style="width: 25%;">Nama User</th>
-                <th style="width: 30%;">Judul Buku</th>
-                <th style="width: 20%;">Tanggal Pinjam</th>
-                <th style="width: 20%;">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($peminjaman as $item)
+    @if(($exportType ?? 'all') === 'denda')
+        <div class="section-title">Riwayat Denda</div>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->user?->name ?? '-' }}</td>
-                    <td>{{ $item->buku?->judul ?? '-' }}</td>
-                    <td>{{ $item->tanggal_pinjam ? \Illuminate\Support\Carbon::parse($item->tanggal_pinjam)->format('d-m-Y') : '-' }}</td>
-                    <td>{{ ucfirst($item->status ?? '-') }}</td>
+                    <th style="width: 5%;">No</th>
+                    <th style="width: 25%;">Nama User</th>
+                    <th style="width: 30%;">Judul Buku</th>
+                    <th style="width: 12%;">Hari Terlambat</th>
+                    <th style="width: 13%;">Status</th>
+                    <th style="width: 15%;">Jumlah Denda</th>
                 </tr>
-            @empty
+            </thead>
+            <tbody>
+                @forelse($denda as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ optional($item->peminjaman?->user)->name ?? '-' }}</td>
+                        <td>{{ optional($item->peminjaman?->buku)->judul ?? '-' }}</td>
+                        <td>{{ $item->hari_terlambat ?? 0 }} hari</td>
+                        <td>{{ $item->status ? ucfirst(str_replace('_', ' ', $item->status)) : '-' }}</td>
+                        <td class="text-right">Rp {{ number_format((int) ($item->jumlah_denda ?? 0), 0, ',', '.') }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6">Tidak ada data denda pada periode ini.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    @else
+        <div class="section-title">Data Peminjaman</div>
+        <table>
+            <thead>
                 <tr>
-                    <td colspan="5">Tidak ada data peminjaman pada periode ini.</td>
+                    <th style="width: 5%;">No</th>
+                    <th style="width: 25%;">Nama User</th>
+                    <th style="width: 30%;">Judul Buku</th>
+                    <th style="width: 20%;">Tanggal Pinjam</th>
+                    <th style="width: 20%;">Status</th>
                 </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($peminjaman as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->user?->name ?? '-' }}</td>
+                        <td>{{ $item->buku?->judul ?? '-' }}</td>
+                        <td>{{ $item->tanggal_pinjam ? \Illuminate\Support\Carbon::parse($item->tanggal_pinjam)->format('d-m-Y') : '-' }}</td>
+                        <td>{{ ucfirst($item->status ?? '-') }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">Tidak ada data peminjaman pada periode ini.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
 
-    <div class="section-title">Data Pengembalian</div>
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 5%;">No</th>
-                <th style="width: 27%;">Nama User</th>
-                <th style="width: 33%;">Judul Buku</th>
-                <th style="width: 15%;">Tanggal Pengembalian</th>
-                <th style="width: 20%;">Denda</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($pengembalian as $item)
+        <div class="section-title">Data Pengembalian</div>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ optional($item->peminjaman?->user)->name ?? '-' }}</td>
-                    <td>{{ optional($item->peminjaman?->buku)->judul ?? '-' }}</td>
-                    <td>{{ $item->tanggal_pengembalian ? \Illuminate\Support\Carbon::parse($item->tanggal_pengembalian)->format('d-m-Y') : '-' }}</td>
-                    <td class="text-right">Rp {{ number_format((int) ($item->denda ?? 0), 0, ',', '.') }}</td>
+                    <th style="width: 5%;">No</th>
+                    <th style="width: 27%;">Nama User</th>
+                    <th style="width: 33%;">Judul Buku</th>
+                    <th style="width: 15%;">Tanggal Pengembalian</th>
+                    <th style="width: 20%;">Denda</th>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="5">Tidak ada data pengembalian pada periode ini.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($pengembalian as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ optional($item->peminjaman?->user)->name ?? '-' }}</td>
+                        <td>{{ optional($item->peminjaman?->buku)->judul ?? '-' }}</td>
+                        <td>{{ $item->tanggal_pengembalian ? \Illuminate\Support\Carbon::parse($item->tanggal_pengembalian)->format('d-m-Y') : '-' }}</td>
+                        <td class="text-right">Rp {{ number_format((int) ($item->denda ?? 0), 0, ',', '.') }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">Tidak ada data pengembalian pada periode ini.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    @endif
 
     <div class="section-title text-right">
         Total Pemasukan Denda: Rp {{ number_format((int) $totalDenda, 0, ',', '.') }}

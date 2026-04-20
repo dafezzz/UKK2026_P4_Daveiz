@@ -21,7 +21,7 @@
             </small>
         </div>
         <a
-            href="{{ route('laporan.pdf', ['start_date' => request('start_date', now()->startOfMonth()->toDateString()), 'end_date' => request('end_date', now()->endOfMonth()->toDateString())]) }}"
+            href="{{ route('laporan.pdf', ['type' => 'denda', 'start_date' => request('start_date', now()->startOfMonth()->toDateString()), 'end_date' => request('end_date', now()->endOfMonth()->toDateString())]) }}"
             class="btn btn-outline-danger btn-sm px-3">
             Export PDF
         </a>
