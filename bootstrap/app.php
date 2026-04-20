@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\ActivityLogger;
 use App\Http\Middleware\RoleMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -13,8 +14,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
 
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            ActivityLogger::class,
+        ]);
+
         $middleware->alias([
             'role' => RoleMiddleware::class,
+            'activity.logger' => ActivityLogger::class,
         ]);
     })
 

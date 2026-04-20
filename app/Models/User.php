@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\Peminjaman; 
+use App\Models\ActivityLog;
 
 class User extends Authenticatable
 {
@@ -59,6 +60,11 @@ public function admin()
 public function petugas()
 {
     return $this->hasOne(Petugas::class);
+}
+
+public function activityLogs()
+{
+    return $this->hasMany(ActivityLog::class);
 }
 
 }

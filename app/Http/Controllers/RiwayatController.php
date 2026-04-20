@@ -2,32 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ActivityLog;
 use App\Models\Denda;
-use App\Models\User;
+use App\Models\Peminjaman;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RiwayatController extends Controller
 {
-    // Tampil riwayat untuk anggota (hanya milik sendiri)
-    public function userIndex()
+    // Riwayat anggota: hanya transaksi peminjaman/pengembalian milik sendiri
+    public function userIndex(Request $request)
     {
-        $activities = ActivityLog::where('user_id', Auth::id())
-            ->with('user')
-            ->orderBy('created_at', 'desc')
+        $riwayat = Peminjaman::with('buku')
+            ->where('user_id', Auth::id())
+            ->whereIn('status', ['dipinjam', 'pengembalian', 'dikembalikan'])
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->string('search');
+                $query->whereHas('buku', function ($bookQuery) use ($search) {
+                    $bookQuery->where('judul', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
             ->paginate(20);
-        
-        return view('riwayat.user', compact('activities'));
+
+        return view('riwayat.user', compact('riwayat'));
     }
 
-    // Tampil semua riwayat untuk admin/petugas
-    public function adminIndex()
+    // Riwayat admin/petugas: semua transaksi peminjaman/pengembalian anggota
+    public function adminIndex(Request $request)
     {
-        $activities = ActivityLog::with('user')
-            ->orderBy('created_at', 'desc')
+        $riwayat = Peminjaman::with(['user', 'buku'])
+            ->whereIn('status', ['dipinjam', 'pengembalian', 'dikembalikan'])
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->string('search');
+
+                $query->where(function ($nested) use ($search) {
+                    $nested->where('status', 'like', "%{$search}%")
+                        ->orWhereHas('user', function ($userQuery) use ($search) {
+                            $userQuery->where('name', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('buku', function ($bookQuery) use ($search) {
+                            $bookQuery->where('judul', 'like', "%{$search}%");
+                        });
+                });
+            })
+            ->latest()
             ->paginate(20);
-        
-        return view('riwayat.admin', compact('activities'));
+
+        return view('riwayat.admin', compact('riwayat'));
     }
 
     // Detail denda user

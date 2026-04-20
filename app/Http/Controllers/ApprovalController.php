@@ -41,9 +41,9 @@ class ApprovalController extends Controller
 
         ActivityLog::create([
             'user_id' => $p->user_id,
-            'action' => 'peminjaman_approved',
+            'activity' => 'update',
             'description' => 'Disetujui sampai ' . $p->tanggal_jatuh_tempo,
-            'model' => 'Peminjaman',
+            'model' => 'peminjaman',
             'model_id' => $p->id
         ]);
 

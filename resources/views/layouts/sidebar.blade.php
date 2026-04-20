@@ -174,12 +174,12 @@
 
     <hr class="sidebar-divider border-light opacity-25">
 
-    {{-- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('logs.index') }}">
             <i class="fas fa-history"></i>
-            <span>Log Aktivitas</span>
+            <span>Activity Logs</span>
         </a>
-    </li> --}}
+    </li>
 
     @endif
 

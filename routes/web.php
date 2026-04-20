@@ -17,6 +17,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\RakController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\LaporanController;
 use App\Models\Peminjaman;
 
 Route::get('/', function () {
@@ -25,6 +26,7 @@ Route::get('/', function () {
 
 // dashboard (semua login)
 Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->get('/laporan/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.pdf');
 
 
 

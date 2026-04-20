@@ -5,16 +5,23 @@
 <div class="container-fluid py-4">
 
     <!-- HEADER -->
-    <div class="mb-4">
-        <h5 class="fw-semibold mb-1 text-dark">Riwayat Aktivitas</h5>
-        <small class="text-muted">Peminjaman, pengembalian, dan denda seluruh anggota</small>
+    <div class="mb-4 d-flex justify-content-between align-items-end">
+        <div>
+            <h5 class="fw-semibold mb-1 text-dark">Riwayat Aktivitas</h5>
+            <small class="text-muted">Riwayat peminjaman & pengembalian seluruh anggota</small>
+        </div>
+        <a
+            href="{{ route('laporan.pdf', ['start_date' => request('start_date', now()->startOfMonth()->toDateString()), 'end_date' => request('end_date', now()->endOfMonth()->toDateString())]) }}"
+            class="btn btn-outline-danger btn-sm px-3">
+            Export PDF
+        </a>
     </div>
 
     <!-- SEARCH -->
     <div class="card border-0 shadow-sm mb-3">
         <div class="card-body">
             <form method="GET" class="d-flex gap-2">
-                <input type="text" name="search" class="form-control search-input" placeholder="Cari aktivitas...">
+                <input type="text" name="search" value="{{ request('search') }}" class="form-control search-input" placeholder="Cari user, buku, atau status...">
                 <button class="btn btn-primary btn-sm px-3">Cari</button>
             </form>
         </div>
@@ -29,39 +36,48 @@
                     <tr class="text-muted small">
                         <th style="width: 40px;">No</th>
                         <th>User</th>
-                        <th>Aktivitas</th>
-                        <th>Deskripsi</th>
+                        <th>Buku</th>
+                        <th>Status</th>
+                        <th>Tanggal Pinjam</th>
+                        <th>Tanggal Kembali</th>
                         <th>Tanggal</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                @forelse($activities as $log)
+                @forelse($riwayat as $log)
                 <tr>
-                    <td class="text-muted">{{ $loop->iteration }}</td>
+                    <td class="text-muted">{{ $riwayat->firstItem() + $loop->index }}</td>
 
                     <td class="fw-medium">
                         {{ $log->user->name ?? '-' }}
                     </td>
 
                     <td>
+                        {{ $log->buku->judul ?? '-' }}
+                    </td>
+
+                    <td>
                         @php
-                            $badge = match($log->action) {
-                                'peminjaman_approved' => 'primary',
-                                'pengembalian_completed' => 'success',
-                                'denda_recorded' => 'warning',
-                                'peminjaman_rejected' => 'danger',
+                            $statusBadge = match($log->status) {
+                                'dipinjam' => 'primary',
+                                'pengembalian' => 'warning',
+                                'dikembalikan' => 'success',
                                 default => 'secondary'
                             };
                         @endphp
 
-                        <span class="badge-soft badge-soft-{{ $badge }}">
-                            {{ ucfirst(str_replace('_', ' ', $log->action)) }}
+                        <span class="badge-soft badge-soft-{{ $statusBadge }}">
+                            {{ ucfirst($log->status) }}
                         </span>
                     </td>
 
                     <td class="text-muted small">
-                        {{ Str::limit($log->description, 60) }}
+                        {{ $log->tanggal_pinjam ? \Carbon\Carbon::parse($log->tanggal_pinjam)->format('d M Y') : '-' }}
+                    </td>
+
+                    <td class="text-muted small">
+                        {{ $log->tanggal_kembali ? \Carbon\Carbon::parse($log->tanggal_kembali)->format('d M Y') : '-' }}
                     </td>
 
                     <td class="text-muted small">
@@ -70,8 +86,8 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center py-5 text-muted">
-                        Belum ada aktivitas
+                    <td colspan="7" class="text-center py-5 text-muted">
+                        Belum ada riwayat peminjaman/pengembalian
                     </td>
                 </tr>
                 @endforelse
@@ -83,7 +99,7 @@
 
     <!-- PAGINATION -->
     <div class="mt-4 d-flex justify-content-end">
-        {{ $activities->links('pagination::bootstrap-5') }}
+        {{ $riwayat->links('pagination::bootstrap-5') }}
     </div>
 
 </div>

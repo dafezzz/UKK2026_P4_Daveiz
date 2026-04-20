@@ -10,19 +10,22 @@ class ActivityLog extends Model
 
     protected $fillable = [
         'user_id',
-        'action',
-        'description',
+        'activity',
         'model',
         'model_id',
-        'activity',
-        'ip_address'
+        'description',
+        'ip_address',
+        'method',
+        'url',
+        'user_agent',
+        // Backward-compatible field for existing app usage.
+        'action',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
     ];
 
-    // 🔥 RELASI
     public function user()
     {
         return $this->belongsTo(User::class);

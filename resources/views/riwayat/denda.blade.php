@@ -9,15 +9,22 @@
 <div class="container py-4">
 
     <!-- HEADER -->
-    <div class="mb-4">
-        <h5 class="fw-semibold mb-1 text-dark">Daftar Denda</h5>
-        <small class="text-muted">
-            @if(auth()->user()->role === 'anggota')
-                Denda peminjaman Anda
-            @else
-                Denda seluruh anggota
-            @endif
-        </small>
+    <div class="mb-4 d-flex justify-content-between align-items-end">
+        <div>
+            <h5 class="fw-semibold mb-1 text-dark">Daftar Denda</h5>
+            <small class="text-muted">
+                @if(auth()->user()->role === 'anggota')
+                    Denda peminjaman Anda
+                @else
+                    Denda seluruh anggota
+                @endif
+            </small>
+        </div>
+        <a
+            href="{{ route('laporan.pdf', ['start_date' => request('start_date', now()->startOfMonth()->toDateString()), 'end_date' => request('end_date', now()->endOfMonth()->toDateString())]) }}"
+            class="btn btn-outline-danger btn-sm px-3">
+            Export PDF
+        </a>
     </div>
 
     <!-- TABLE -->

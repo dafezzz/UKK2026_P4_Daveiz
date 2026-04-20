@@ -5,7 +5,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h5 class="fw-semibold mb-0">Penerbit</h5>
+            <h5 class="fw-semibold mb-0">Pengarang</h5>
             <small class="text-muted">Manajemen data pengarang</small>
         </div>
 

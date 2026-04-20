@@ -1,0 +1,51 @@
+.u-w-60 {
+    width: 60px;
+}
+
+.u-w-240 {
+    width: 240px;
+}
+
+.approval-table tbody tr {
+    transition: all 0.15s ease;
+}
+
+.approval-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.dipinjam {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status-badge.pengembalian {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status-badge.selesai {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.ditolak {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.approval-page .btn {
+    border-radius: 6px;
+}

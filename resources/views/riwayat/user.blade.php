@@ -5,23 +5,39 @@
 <div class="container py-4">
 
     <!-- HEADER -->
-    <div class="mb-4">
-        <h5 class="fw-semibold mb-1 text-dark">Riwayat Aktivitas</h5>
-        <small class="text-muted">Peminjaman, pengembalian, dan denda Anda</small>
+    <div class="mb-4 d-flex justify-content-between align-items-end">
+        <div>
+            <h5 class="fw-semibold mb-1 text-dark">Riwayat Aktivitas</h5>
+            <small class="text-muted">Riwayat peminjaman & pengembalian Anda</small>
+        </div>
+        <a
+            href="{{ route('laporan.pdf', ['start_date' => request('start_date', now()->startOfMonth()->toDateString()), 'end_date' => request('end_date', now()->endOfMonth()->toDateString())]) }}"
+            class="btn btn-outline-danger btn-sm px-3">
+            Export PDF
+        </a>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="card border-0 shadow-sm mb-3">
+        <div class="card-body">
+            <form method="GET" class="d-flex gap-2">
+                <input type="text" name="search" value="{{ request('search') }}" class="form-control search-input" placeholder="Cari judul buku...">
+                <button class="btn btn-primary btn-sm px-3">Cari</button>
+            </form>
+        </div>
     </div>
 
     <!-- TIMELINE -->
     <div class="card border-0 shadow-sm">
         <div class="card-body">
 
-            @forelse($activities as $log)
+            @forelse($riwayat as $log)
 
             @php
-                $color = match($log->action) {
-                    'peminjaman_approved' => 'primary',
-                    'pengembalian_completed' => 'success',
-                    'denda_recorded' => 'warning',
-                    'peminjaman_rejected' => 'danger',
+                $color = match($log->status) {
+                    'dipinjam' => 'primary',
+                    'pengembalian' => 'warning',
+                    'dikembalikan' => 'success',
                     default => 'secondary'
                 };
             @endphp
@@ -34,11 +50,13 @@
                 <!-- CONTENT -->
                 <div class="timeline-content">
                     <div class="fw-semibold text-dark">
-                        {{ ucfirst(str_replace('_', ' ', $log->action)) }}
+                        {{ $log->buku->judul ?? '-' }}
                     </div>
 
                     <div class="text-muted small">
-                        {{ $log->description }}
+                        Status: <strong>{{ ucfirst($log->status) }}</strong>
+                        | Pinjam: {{ $log->tanggal_pinjam ? \Carbon\Carbon::parse($log->tanggal_pinjam)->format('d M Y') : '-' }}
+                        | Kembali: {{ $log->tanggal_kembali ? \Carbon\Carbon::parse($log->tanggal_kembali)->format('d M Y') : '-' }}
                     </div>
 
                     <div class="timeline-date">
@@ -50,7 +68,7 @@
 
             @empty
             <div class="text-center py-5 text-muted">
-                Belum ada aktivitas
+                Belum ada riwayat peminjaman/pengembalian
             </div>
             @endforelse
 
@@ -59,7 +77,7 @@
 
     <!-- PAGINATION -->
     <div class="mt-4 d-flex justify-content-end">
-        {{ $activities->links('pagination::bootstrap-5') }}
+        {{ $riwayat->links('pagination::bootstrap-5') }}
     </div>
 
     <!-- DENDA -->
@@ -81,6 +99,13 @@
 </div>
 
 <style>
+
+/* SEARCH */
+.search-input {
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
 
 /* TIMELINE */
 .timeline-item {
