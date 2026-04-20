@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 16, 2026 at 07:22 AM
+-- Generation Time: Apr 20, 2026 at 10:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -30,11 +30,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `activity_logs` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
+  `activity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `action` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `model` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `model_id` bigint DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `method` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` text COLLATE utf8mb4_unicode_ci,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,45 +47,300 @@ CREATE TABLE `activity_logs` (
 -- Dumping data for table `activity_logs`
 --
 
-INSERT INTO `activity_logs` (`id`, `user_id`, `action`, `model`, `model_id`, `description`, `ip_address`, `created_at`, `updated_at`) VALUES
-(1, 10, 'peminjaman_approved', 'Peminjaman', 9, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-22', NULL, '2026-04-15 09:19:33', '2026-04-15 09:19:33'),
-(2, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:50', '2026-04-15 09:20:50'),
-(3, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:51', '2026-04-15 09:20:51'),
-(4, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:51', '2026-04-15 09:20:51'),
-(5, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:52', '2026-04-15 09:20:52'),
-(6, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:52', '2026-04-15 09:20:52'),
-(7, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:53', '2026-04-15 09:20:53'),
-(8, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:53', '2026-04-15 09:20:53'),
-(9, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:54', '2026-04-15 09:20:54'),
-(10, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:57', '2026-04-15 09:20:57'),
-(11, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:57', '2026-04-15 09:20:57'),
-(12, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:58', '2026-04-15 09:20:58'),
-(13, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:58', '2026-04-15 09:20:58'),
-(14, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:59', '2026-04-15 09:20:59'),
-(15, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:20:59', '2026-04-15 09:20:59'),
-(16, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:00', '2026-04-15 09:21:00'),
-(17, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:01', '2026-04-15 09:21:01'),
-(18, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:03', '2026-04-15 09:21:03'),
-(19, 10, 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, '2026-04-15 09:21:04', '2026-04-15 09:21:04'),
-(20, 10, 'peminjaman_approved', 'Peminjaman', 10, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, '2026-04-15 17:20:23', '2026-04-15 17:20:23'),
-(21, 10, 'denda_recorded', 'Denda', 10, 'Denda Rp 34,893 untuk keterlambatan 6.9786974663425925 hari', NULL, '2026-04-15 17:30:42', '2026-04-15 17:30:42'),
-(22, 10, 'pengembalian_completed', 'Peminjaman', 10, 'Pengembalian Buku Biar Kaya selesai', NULL, '2026-04-15 17:30:42', '2026-04-15 17:30:42'),
-(23, 10, 'peminjaman_approved', 'Peminjaman', 11, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, '2026-04-15 17:31:30', '2026-04-15 17:31:30'),
-(24, 10, 'peminjaman_approved', 'Peminjaman', 12, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, '2026-04-15 17:58:37', '2026-04-15 17:58:37'),
-(25, 10, 'denda_recorded', 'Denda', 11, 'Denda Rp 34,796 untuk keterlambatan 6.959253443275463 hari', NULL, '2026-04-15 17:58:42', '2026-04-15 17:58:42'),
-(26, 10, 'pengembalian_completed', 'Peminjaman', 11, 'Pengembalian Buku Biar Kaya selesai', NULL, '2026-04-15 17:58:42', '2026-04-15 17:58:42'),
-(27, 10, 'peminjaman_approved', 'Peminjaman', 13, 'Disetujui sampai 2026-04-23 01:20:29', NULL, '2026-04-15 18:20:29', '2026-04-15 18:20:29'),
-(28, 10, 'peminjaman_approved', 'Peminjaman', 14, 'Disetujui sampai 2026-04-23 01:24:38', NULL, '2026-04-15 18:24:38', '2026-04-15 18:24:38'),
-(29, 10, 'peminjaman_approved', 'Peminjaman', 15, 'Disetujui sampai 2026-04-23 01:32:14', NULL, '2026-04-15 18:32:14', '2026-04-15 18:32:14'),
-(30, 10, 'peminjaman_approved', 'Peminjaman', 16, 'Disetujui sampai 2026-04-23 01:35:04', NULL, '2026-04-15 18:35:04', '2026-04-15 18:35:04'),
-(31, 10, 'peminjaman_approved', 'Peminjaman', 17, 'Disetujui sampai 2026-04-23 01:52:52', NULL, '2026-04-15 18:52:52', '2026-04-15 18:52:52'),
-(32, 10, 'peminjaman_approved', 'Peminjaman', 18, 'Disetujui sampai 2026-04-23 01:55:13', NULL, '2026-04-15 18:55:13', '2026-04-15 18:55:13'),
-(33, 10, 'peminjaman_approved', 'Peminjaman', 19, 'Disetujui sampai 2026-04-23 02:02:27', NULL, '2026-04-15 19:02:27', '2026-04-15 19:02:27'),
-(34, 10, 'peminjaman_approved', 'Peminjaman', 20, 'Disetujui sampai 2026-04-23 02:07:12', NULL, '2026-04-15 19:07:12', '2026-04-15 19:07:12'),
-(35, 10, 'peminjaman_approved', 'Peminjaman', 21, 'Disetujui sampai 2026-04-23 02:07:47', NULL, '2026-04-15 19:07:47', '2026-04-15 19:07:47'),
-(36, 10, 'peminjaman_approved', 'Peminjaman', 22, 'Disetujui sampai 2026-04-23 02:14:44', NULL, '2026-04-15 19:14:44', '2026-04-15 19:14:44'),
-(37, 10, 'peminjaman_approved', 'Peminjaman', 23, 'Disetujui sampai 2026-04-23 02:42:46', NULL, '2026-04-15 19:42:46', '2026-04-15 19:42:46'),
-(38, 10, 'peminjaman_approved', 'Peminjaman', 24, 'Disetujui sampai 2026-04-23 07:11:59', NULL, '2026-04-16 00:12:00', '2026-04-16 00:12:00');
+INSERT INTO `activity_logs` (`id`, `user_id`, `activity`, `action`, `model`, `model_id`, `description`, `ip_address`, `method`, `url`, `user_agent`, `created_at`, `updated_at`) VALUES
+(1, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 9, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-22', NULL, NULL, NULL, NULL, '2026-04-15 09:19:33', '2026-04-20 07:43:00'),
+(2, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:50', '2026-04-20 07:43:00'),
+(3, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:51', '2026-04-20 07:43:00'),
+(4, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:51', '2026-04-20 07:43:00'),
+(5, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:52', '2026-04-20 07:43:00'),
+(6, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:52', '2026-04-20 07:43:00'),
+(7, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:53', '2026-04-20 07:43:00'),
+(8, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:53', '2026-04-20 07:43:00'),
+(9, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:54', '2026-04-20 07:43:00'),
+(10, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:57', '2026-04-20 07:43:00'),
+(11, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:57', '2026-04-20 07:43:00'),
+(12, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:58', '2026-04-20 07:43:00'),
+(13, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:58', '2026-04-20 07:43:00'),
+(14, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:59', '2026-04-20 07:43:00'),
+(15, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:20:59', '2026-04-20 07:43:00'),
+(16, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:21:00', '2026-04-20 07:43:00'),
+(17, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:21:01', '2026-04-20 07:43:00'),
+(18, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:21:03', '2026-04-20 07:43:00'),
+(19, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 9, 'Pengembalian Buku Biar Kaya selesai tanpa denda', NULL, NULL, NULL, NULL, '2026-04-15 09:21:04', '2026-04-20 07:43:00'),
+(20, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 10, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, NULL, NULL, NULL, '2026-04-15 17:20:23', '2026-04-20 07:43:00'),
+(21, 10, 'denda_recorded', 'denda_recorded', 'Denda', 10, 'Denda Rp 34,893 untuk keterlambatan 6.9786974663425925 hari', NULL, NULL, NULL, NULL, '2026-04-15 17:30:42', '2026-04-20 07:43:00'),
+(22, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 10, 'Pengembalian Buku Biar Kaya selesai', NULL, NULL, NULL, NULL, '2026-04-15 17:30:42', '2026-04-20 07:43:00'),
+(23, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 11, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, NULL, NULL, NULL, '2026-04-15 17:31:30', '2026-04-20 07:43:00'),
+(24, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 12, 'Peminjaman Buku Biar Kaya disetujui sampai 2026-04-23', NULL, NULL, NULL, NULL, '2026-04-15 17:58:37', '2026-04-20 07:43:00'),
+(25, 10, 'denda_recorded', 'denda_recorded', 'Denda', 11, 'Denda Rp 34,796 untuk keterlambatan 6.959253443275463 hari', NULL, NULL, NULL, NULL, '2026-04-15 17:58:42', '2026-04-20 07:43:00'),
+(26, 10, 'pengembalian_completed', 'pengembalian_completed', 'Peminjaman', 11, 'Pengembalian Buku Biar Kaya selesai', NULL, NULL, NULL, NULL, '2026-04-15 17:58:42', '2026-04-20 07:43:00'),
+(27, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 13, 'Disetujui sampai 2026-04-23 01:20:29', NULL, NULL, NULL, NULL, '2026-04-15 18:20:29', '2026-04-20 07:43:00'),
+(28, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 14, 'Disetujui sampai 2026-04-23 01:24:38', NULL, NULL, NULL, NULL, '2026-04-15 18:24:38', '2026-04-20 07:43:00'),
+(29, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 15, 'Disetujui sampai 2026-04-23 01:32:14', NULL, NULL, NULL, NULL, '2026-04-15 18:32:14', '2026-04-20 07:43:00'),
+(30, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 16, 'Disetujui sampai 2026-04-23 01:35:04', NULL, NULL, NULL, NULL, '2026-04-15 18:35:04', '2026-04-20 07:43:00'),
+(31, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 17, 'Disetujui sampai 2026-04-23 01:52:52', NULL, NULL, NULL, NULL, '2026-04-15 18:52:52', '2026-04-20 07:43:00'),
+(32, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 18, 'Disetujui sampai 2026-04-23 01:55:13', NULL, NULL, NULL, NULL, '2026-04-15 18:55:13', '2026-04-20 07:43:00'),
+(33, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 19, 'Disetujui sampai 2026-04-23 02:02:27', NULL, NULL, NULL, NULL, '2026-04-15 19:02:27', '2026-04-20 07:43:00'),
+(34, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 20, 'Disetujui sampai 2026-04-23 02:07:12', NULL, NULL, NULL, NULL, '2026-04-15 19:07:12', '2026-04-20 07:43:00'),
+(35, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 21, 'Disetujui sampai 2026-04-23 02:07:47', NULL, NULL, NULL, NULL, '2026-04-15 19:07:47', '2026-04-20 07:43:00'),
+(36, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 22, 'Disetujui sampai 2026-04-23 02:14:44', NULL, NULL, NULL, NULL, '2026-04-15 19:14:44', '2026-04-20 07:43:00'),
+(37, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 23, 'Disetujui sampai 2026-04-23 02:42:46', NULL, NULL, NULL, NULL, '2026-04-15 19:42:46', '2026-04-20 07:43:00'),
+(38, 10, 'peminjaman_approved', 'peminjaman_approved', 'Peminjaman', 24, 'Disetujui sampai 2026-04-23 07:11:59', NULL, NULL, NULL, NULL, '2026-04-16 00:12:00', '2026-04-20 07:43:00'),
+(39, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:43:23', '2026-04-20 07:43:23'),
+(40, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:43:25', '2026-04-20 07:43:25'),
+(41, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:43:26', '2026-04-20 07:43:26'),
+(42, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:43:37', '2026-04-20 07:43:37'),
+(43, NULL, 'view', NULL, 'admin', NULL, 'GET admin', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/admin', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:43:58', '2026-04-20 07:43:58'),
+(44, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:44:01', '2026-04-20 07:44:01'),
+(45, NULL, 'view', NULL, 'kelas', NULL, 'GET kelas', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/kelas', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:44:09', '2026-04-20 07:44:09'),
+(46, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:44:13', '2026-04-20 07:44:13'),
+(47, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:46:29', '2026-04-20 07:46:29'),
+(48, NULL, 'view', NULL, 'kelas', NULL, 'GET kelas', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/kelas', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:46:38', '2026-04-20 07:46:38'),
+(49, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:46:42', '2026-04-20 07:46:42'),
+(50, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:46:52', '2026-04-20 07:46:52'),
+(51, NULL, 'view', NULL, 'buku', NULL, 'GET buku', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/buku', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:47:02', '2026-04-20 07:47:02'),
+(52, NULL, 'view', NULL, 'buku', NULL, 'GET buku', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/buku', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:48:58', '2026-04-20 07:48:58'),
+(53, NULL, 'view', NULL, 'penerbit', NULL, 'GET penerbit', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/penerbit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:11', '2026-04-20 07:49:11'),
+(54, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:22', '2026-04-20 07:49:22'),
+(55, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:22', '2026-04-20 07:49:22'),
+(56, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:23', '2026-04-20 07:49:23'),
+(57, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:34', '2026-04-20 07:49:34'),
+(58, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:34', '2026-04-20 07:49:34'),
+(59, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:35', '2026-04-20 07:49:35'),
+(60, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:45', '2026-04-20 07:49:45'),
+(61, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:45', '2026-04-20 07:49:45'),
+(62, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:45', '2026-04-20 07:49:45'),
+(63, 10, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:51', '2026-04-20 07:49:51'),
+(64, 10, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:51', '2026-04-20 07:49:51'),
+(65, 10, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:49:52', '2026-04-20 07:49:52'),
+(66, 10, 'view', NULL, 'riwayat-saya', NULL, 'GET riwayat-saya', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-saya', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:50:28', '2026-04-20 07:50:28'),
+(67, 10, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:50:40', '2026-04-20 07:50:40'),
+(68, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:50:40', '2026-04-20 07:50:40'),
+(69, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:50:41', '2026-04-20 07:50:41'),
+(70, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:50:47', '2026-04-20 07:50:47'),
+(71, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:50:47', '2026-04-20 07:50:47'),
+(72, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 07:50:48', '2026-04-20 07:50:48'),
+(73, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:01:51', '2026-04-20 08:01:51'),
+(74, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:02:01', '2026-04-20 08:02:01'),
+(75, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:02:06', '2026-04-20 08:02:06'),
+(76, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:02:26', '2026-04-20 08:02:26'),
+(77, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:21', '2026-04-20 08:03:21'),
+(78, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:23', '2026-04-20 08:03:23'),
+(79, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:27', '2026-04-20 08:03:27'),
+(80, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:34', '2026-04-20 08:03:34'),
+(81, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:34', '2026-04-20 08:03:34'),
+(82, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:34', '2026-04-20 08:03:34'),
+(83, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:38', '2026-04-20 08:03:38'),
+(84, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:39', '2026-04-20 08:03:39'),
+(85, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:45', '2026-04-20 08:03:45'),
+(86, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:45', '2026-04-20 08:03:45'),
+(87, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:46', '2026-04-20 08:03:46'),
+(88, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:56', '2026-04-20 08:03:56'),
+(89, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:56', '2026-04-20 08:03:56'),
+(90, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:03:57', '2026-04-20 08:03:57'),
+(91, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:00', '2026-04-20 08:04:00'),
+(92, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:01', '2026-04-20 08:04:01'),
+(93, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:05', '2026-04-20 08:04:05'),
+(94, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:05', '2026-04-20 08:04:05'),
+(95, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:12', '2026-04-20 08:04:12'),
+(96, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:12', '2026-04-20 08:04:12'),
+(97, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:13', '2026-04-20 08:04:13'),
+(98, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:04:22', '2026-04-20 08:04:22'),
+(99, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:06:49', '2026-04-20 08:06:49'),
+(100, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:06:53', '2026-04-20 08:06:53'),
+(101, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:06:56', '2026-04-20 08:06:56'),
+(102, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:07:07', '2026-04-20 08:07:07'),
+(103, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', '2026-04-20 08:07:44', '2026-04-20 08:07:44'),
+(104, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', '2026-04-20 08:08:02', '2026-04-20 08:08:02'),
+(105, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', '2026-04-20 08:08:02', '2026-04-20 08:08:02'),
+(106, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', '2026-04-20 08:08:02', '2026-04-20 08:08:02'),
+(107, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', '2026-04-20 08:08:09', '2026-04-20 08:08:09'),
+(108, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', '2026-04-20 08:08:12', '2026-04-20 08:08:12'),
+(109, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', '2026-04-20 08:08:30', '2026-04-20 08:08:30'),
+(110, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:10:14', '2026-04-20 08:10:14'),
+(111, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:10:18', '2026-04-20 08:10:18'),
+(112, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:10:18', '2026-04-20 08:10:18'),
+(113, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:10:22', '2026-04-20 08:10:22'),
+(114, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:10:25', '2026-04-20 08:10:25'),
+(115, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:01', '2026-04-20 08:11:01'),
+(116, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:05', '2026-04-20 08:11:05'),
+(117, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:06', '2026-04-20 08:11:06'),
+(118, NULL, 'view', NULL, 'pengarang', NULL, 'GET pengarang', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengarang', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:20', '2026-04-20 08:11:20'),
+(119, NULL, 'view', NULL, 'pengarang', NULL, 'GET pengarang/create', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengarang/create', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:22', '2026-04-20 08:11:22'),
+(120, NULL, 'create', NULL, 'pengarang', NULL, 'POST pengarang', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/pengarang', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:53', '2026-04-20 08:11:53'),
+(121, NULL, 'view', NULL, 'pengarang', NULL, 'GET pengarang', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengarang', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:54', '2026-04-20 08:11:54'),
+(122, NULL, 'view', NULL, 'pengarang', NULL, 'GET pengarang/4/edit', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengarang/4/edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:11:59', '2026-04-20 08:11:59'),
+(123, NULL, 'update', NULL, 'pengarang', NULL, 'PUT pengarang/4', '127.0.0.1', 'PUT', 'http://127.0.0.1:8000/pengarang/4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:12:04', '2026-04-20 08:12:04'),
+(124, NULL, 'view', NULL, 'pengarang', NULL, 'GET pengarang', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengarang', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:12:04', '2026-04-20 08:12:04'),
+(125, NULL, 'view', NULL, 'penerbit', NULL, 'GET penerbit', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/penerbit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:12:08', '2026-04-20 08:12:08'),
+(126, NULL, 'view', NULL, 'penerbit', NULL, 'GET penerbit/create', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/penerbit/create', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:12:13', '2026-04-20 08:12:13'),
+(127, NULL, 'create', NULL, 'penerbit', NULL, 'POST penerbit', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/penerbit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:12:24', '2026-04-20 08:12:24'),
+(128, NULL, 'view', NULL, 'penerbit', NULL, 'GET penerbit/create', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/penerbit/create', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:12:26', '2026-04-20 08:12:26'),
+(129, NULL, 'create', NULL, 'penerbit', NULL, 'POST penerbit', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/penerbit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:00', '2026-04-20 08:13:00'),
+(130, NULL, 'view', NULL, 'penerbit', NULL, 'GET penerbit', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/penerbit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:00', '2026-04-20 08:13:00'),
+(131, NULL, 'view', NULL, 'kategori', NULL, 'GET kategori', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/kategori', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:06', '2026-04-20 08:13:06'),
+(132, NULL, 'view', NULL, 'kelas', NULL, 'GET kelas', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/kelas', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:11', '2026-04-20 08:13:11'),
+(133, NULL, 'view', NULL, 'rak', NULL, 'GET rak', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/rak', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:15', '2026-04-20 08:13:15'),
+(134, NULL, 'view', NULL, 'admin', NULL, 'GET admin', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/admin', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:17', '2026-04-20 08:13:17'),
+(135, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:22', '2026-04-20 08:13:22'),
+(136, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:53', '2026-04-20 08:13:53'),
+(137, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:57', '2026-04-20 08:13:57'),
+(138, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:57', '2026-04-20 08:13:57'),
+(139, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:13:58', '2026-04-20 08:13:58'),
+(140, 10, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:02', '2026-04-20 08:14:02'),
+(141, 10, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:02', '2026-04-20 08:14:02'),
+(142, 10, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:03', '2026-04-20 08:14:03'),
+(143, 10, 'view', NULL, 'pengembalian-user', NULL, 'GET pengembalian-user', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengembalian-user', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:13', '2026-04-20 08:14:13'),
+(144, 10, 'create', NULL, 'pengembalian-user', NULL, 'POST pengembalian-user/24', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/pengembalian-user/24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:15', '2026-04-20 08:14:15'),
+(145, 10, 'view', NULL, 'pengembalian-user', NULL, 'GET pengembalian-user', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengembalian-user', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:16', '2026-04-20 08:14:16'),
+(146, 10, 'view', NULL, 'katalog', NULL, 'GET katalog', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/katalog', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:19', '2026-04-20 08:14:19'),
+(147, 10, 'create', NULL, 'katalog', NULL, 'POST katalog', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/katalog', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:23', '2026-04-20 08:14:23'),
+(148, 10, 'view', NULL, 'katalog', NULL, 'GET katalog', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/katalog', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:24', '2026-04-20 08:14:24'),
+(149, 10, 'view', NULL, 'pengembalian-user', NULL, 'GET pengembalian-user', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/pengembalian-user', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:27', '2026-04-20 08:14:27'),
+(150, 10, 'view', NULL, 'riwayat-saya', NULL, 'GET riwayat-saya', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-saya', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:28', '2026-04-20 08:14:28'),
+(151, 10, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:31', '2026-04-20 08:14:31'),
+(152, 10, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:41', '2026-04-20 08:14:41'),
+(153, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:41', '2026-04-20 08:14:41'),
+(154, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:41', '2026-04-20 08:14:41'),
+(155, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:47', '2026-04-20 08:14:47'),
+(156, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:47', '2026-04-20 08:14:47'),
+(157, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:47', '2026-04-20 08:14:47'),
+(158, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:51', '2026-04-20 08:14:51'),
+(159, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:55', '2026-04-20 08:14:55'),
+(160, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:55', '2026-04-20 08:14:55'),
+(161, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:14:56', '2026-04-20 08:14:56'),
+(162, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:04', '2026-04-20 08:15:04'),
+(163, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:04', '2026-04-20 08:15:04'),
+(164, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:05', '2026-04-20 08:15:05'),
+(165, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:08', '2026-04-20 08:15:08'),
+(166, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:12', '2026-04-20 08:15:12'),
+(167, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:37', '2026-04-20 08:15:37'),
+(168, 10, 'update', NULL, 'peminjaman', 25, 'Disetujui sampai 2026-04-27 15:15:40', NULL, NULL, NULL, NULL, '2026-04-20 08:15:40', '2026-04-20 08:15:40'),
+(169, NULL, 'create', NULL, 'approval', NULL, 'POST approval/25/approve', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/approval/25/approve', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:40', '2026-04-20 08:15:40'),
+(170, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:40', '2026-04-20 08:15:40'),
+(171, NULL, 'create', NULL, 'approval', NULL, 'POST approval/24/konfirmasi', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/approval/24/konfirmasi', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:42', '2026-04-20 08:15:42'),
+(172, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:45', '2026-04-20 08:15:45'),
+(173, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:15:47', '2026-04-20 08:15:47'),
+(174, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:17:04', '2026-04-20 08:17:04'),
+(175, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:17:12', '2026-04-20 08:17:12'),
+(176, NULL, 'view', NULL, 'buku', NULL, 'GET buku', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/buku', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:17:14', '2026-04-20 08:17:14'),
+(177, NULL, 'view', NULL, 'buku', NULL, 'GET buku/2/edit', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/buku/2/edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:17:18', '2026-04-20 08:17:18'),
+(178, NULL, 'update', NULL, 'buku', NULL, 'PUT buku/2', '127.0.0.1', 'PUT', 'http://127.0.0.1:8000/buku/2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:17:23', '2026-04-20 08:17:23'),
+(179, NULL, 'view', NULL, 'buku', NULL, 'GET buku', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/buku', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:17:24', '2026-04-20 08:17:24'),
+(180, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:30:04', '2026-04-20 08:30:04'),
+(181, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:30:16', '2026-04-20 08:30:16'),
+(182, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:30:28', '2026-04-20 08:30:28'),
+(183, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:30:31', '2026-04-20 08:30:31'),
+(184, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:30:51', '2026-04-20 08:30:51'),
+(185, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:30:56', '2026-04-20 08:30:56'),
+(186, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:30:59', '2026-04-20 08:30:59'),
+(187, NULL, 'view', NULL, 'denda-semua', NULL, 'GET denda-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/denda-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:34:43', '2026-04-20 08:34:43'),
+(188, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01&type=denda', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:34:45', '2026-04-20 08:34:45'),
+(189, NULL, 'view', NULL, 'riwayat-semua', NULL, 'GET riwayat-semua', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/riwayat-semua', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:34:56', '2026-04-20 08:34:56'),
+(190, NULL, 'view', NULL, 'laporan', NULL, 'GET laporan/pdf', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/laporan/pdf?end_date=2026-04-30&start_date=2026-04-01', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 08:34:58', '2026-04-20 08:34:58'),
+(191, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:33:15', '2026-04-20 15:33:15'),
+(192, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:33:20', '2026-04-20 15:33:20'),
+(193, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:34:27', '2026-04-20 15:34:27'),
+(194, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:34:28', '2026-04-20 15:34:28'),
+(195, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:34:37', '2026-04-20 15:34:37'),
+(196, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:34:37', '2026-04-20 15:34:37'),
+(197, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:34:51', '2026-04-20 15:34:51'),
+(198, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:34:52', '2026-04-20 15:34:52'),
+(199, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:37:59', '2026-04-20 15:37:59'),
+(200, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:38:00', '2026-04-20 15:38:00'),
+(201, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:38:11', '2026-04-20 15:38:11'),
+(202, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:38:12', '2026-04-20 15:38:12'),
+(203, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:38:55', '2026-04-20 15:38:55'),
+(204, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:38:55', '2026-04-20 15:38:55'),
+(205, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:39:08', '2026-04-20 15:39:08'),
+(206, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:39:08', '2026-04-20 15:39:08'),
+(207, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:39:53', '2026-04-20 15:39:53'),
+(208, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:39:53', '2026-04-20 15:39:53'),
+(209, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:40:05', '2026-04-20 15:40:05'),
+(210, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:40:05', '2026-04-20 15:40:05');
+INSERT INTO `activity_logs` (`id`, `user_id`, `activity`, `action`, `model`, `model_id`, `description`, `ip_address`, `method`, `url`, `user_agent`, `created_at`, `updated_at`) VALUES
+(211, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:40:06', '2026-04-20 15:40:06'),
+(212, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:40:37', '2026-04-20 15:40:37'),
+(213, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:41:25', '2026-04-20 15:41:25'),
+(214, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:41:25', '2026-04-20 15:41:25'),
+(215, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:41:34', '2026-04-20 15:41:34'),
+(216, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:41:34', '2026-04-20 15:41:34'),
+(217, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:41:55', '2026-04-20 15:41:55'),
+(218, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:41:55', '2026-04-20 15:41:55'),
+(219, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:42:02', '2026-04-20 15:42:02'),
+(220, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:42:46', '2026-04-20 15:42:46'),
+(221, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:42:46', '2026-04-20 15:42:46'),
+(222, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:43:23', '2026-04-20 15:43:23'),
+(223, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:43:23', '2026-04-20 15:43:23'),
+(224, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:43:23', '2026-04-20 15:43:23'),
+(225, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:43:38', '2026-04-20 15:43:38'),
+(226, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:06', '2026-04-20 15:44:06'),
+(227, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:07', '2026-04-20 15:44:07'),
+(228, NULL, 'view', NULL, 'katalog', NULL, 'GET katalog', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/katalog', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:12', '2026-04-20 15:44:12'),
+(229, NULL, 'create', NULL, 'katalog', NULL, 'POST katalog', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/katalog', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:16', '2026-04-20 15:44:16'),
+(230, NULL, 'view', NULL, 'katalog', NULL, 'GET katalog', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/katalog', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:17', '2026-04-20 15:44:17'),
+(231, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:21', '2026-04-20 15:44:21'),
+(232, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:21', '2026-04-20 15:44:21'),
+(233, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:21', '2026-04-20 15:44:21'),
+(234, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:36', '2026-04-20 15:44:36'),
+(235, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:37', '2026-04-20 15:44:37'),
+(236, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:43', '2026-04-20 15:44:43'),
+(237, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:43', '2026-04-20 15:44:43'),
+(238, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:44', '2026-04-20 15:44:44'),
+(239, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:47', '2026-04-20 15:44:47'),
+(240, NULL, 'update', NULL, 'peminjaman', 26, 'Disetujui sampai 2026-04-27 22:44:50', NULL, NULL, NULL, NULL, '2026-04-20 15:44:50', '2026-04-20 15:44:50'),
+(241, NULL, 'create', NULL, 'approval', NULL, 'POST approval/26/approve', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/approval/26/approve', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:50', '2026-04-20 15:44:50'),
+(242, NULL, 'view', NULL, 'approval', NULL, 'GET approval', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/approval', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:50', '2026-04-20 15:44:50'),
+(243, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:57', '2026-04-20 15:44:57'),
+(244, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:57', '2026-04-20 15:44:57'),
+(245, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:44:58', '2026-04-20 15:44:58'),
+(246, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:15', '2026-04-20 15:45:15'),
+(247, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:16', '2026-04-20 15:45:16'),
+(248, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:23', '2026-04-20 15:45:23'),
+(249, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:24', '2026-04-20 15:45:24'),
+(250, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:42', '2026-04-20 15:45:42'),
+(251, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:42', '2026-04-20 15:45:42'),
+(252, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:42', '2026-04-20 15:45:42'),
+(253, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:56', '2026-04-20 15:45:56'),
+(254, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:56', '2026-04-20 15:45:56'),
+(255, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:45:56', '2026-04-20 15:45:56'),
+(256, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:20', '2026-04-20 15:46:20'),
+(257, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:20', '2026-04-20 15:46:20'),
+(258, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:29', '2026-04-20 15:46:29'),
+(259, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:29', '2026-04-20 15:46:29'),
+(260, NULL, 'login', NULL, 'auth', NULL, 'User login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:35', '2026-04-20 15:46:35'),
+(261, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:35', '2026-04-20 15:46:35'),
+(262, NULL, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:36', '2026-04-20 15:46:36'),
+(263, NULL, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:48', '2026-04-20 15:46:48'),
+(264, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:48', '2026-04-20 15:46:48'),
+(265, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:46:48', '2026-04-20 15:46:48'),
+(266, NULL, 'create', NULL, 'login', NULL, 'POST login', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:47:11', '2026-04-20 15:47:11'),
+(267, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:47:12', '2026-04-20 15:47:12'),
+(268, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:47:26', '2026-04-20 15:47:26'),
+(269, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:47:56', '2026-04-20 15:47:56'),
+(270, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:47:57', '2026-04-20 15:47:57'),
+(271, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:11', '2026-04-20 15:48:11'),
+(272, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:12', '2026-04-20 15:48:12'),
+(273, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:29', '2026-04-20 15:48:29'),
+(274, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:29', '2026-04-20 15:48:29'),
+(275, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:43', '2026-04-20 15:48:43'),
+(276, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:44', '2026-04-20 15:48:44'),
+(277, NULL, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:56', '2026-04-20 15:48:56'),
+(278, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:48:57', '2026-04-20 15:48:57'),
+(279, 14, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:49:33', '2026-04-20 15:49:33'),
+(280, 14, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:49:34', '2026-04-20 15:49:34'),
+(281, 14, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:49:39', '2026-04-20 15:49:39'),
+(282, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:49:39', '2026-04-20 15:49:39'),
+(283, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:49:40', '2026-04-20 15:49:40'),
+(284, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:50:05', '2026-04-20 15:50:05'),
+(285, 15, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:50:24', '2026-04-20 15:50:24'),
+(286, 15, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:50:25', '2026-04-20 15:50:25'),
+(287, 15, 'logout', NULL, 'auth', NULL, 'User logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:50:28', '2026-04-20 15:50:28'),
+(288, NULL, 'create', NULL, 'logout', NULL, 'POST logout', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/logout', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:50:28', '2026-04-20 15:50:28'),
+(289, NULL, 'view', NULL, 'home', NULL, 'GET /', '127.0.0.1', 'GET', 'http://127.0.0.1:8000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:50:29', '2026-04-20 15:50:29'),
+(290, NULL, 'view', NULL, 'register', NULL, 'GET register', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:50:31', '2026-04-20 15:50:31'),
+(291, 16, 'create', NULL, 'register', NULL, 'POST register', '127.0.0.1', 'POST', 'http://127.0.0.1:8000/register', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:51:03', '2026-04-20 15:51:03'),
+(292, 16, 'view', NULL, 'dashboard', NULL, 'GET dashboard', '127.0.0.1', 'GET', 'http://127.0.0.1:8000/dashboard', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', '2026-04-20 15:51:04', '2026-04-20 15:51:04');
 
 -- --------------------------------------------------------
 
@@ -104,8 +363,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `user_id`, `nip`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 6, '232425265', '081334709', 'Kiaracondong', '2026-04-13 21:06:00', '2026-04-13 21:06:31'),
-(2, 7, '23242245', '0895748243', 'Smk mvp ars', '2026-04-13 21:07:48', '2026-04-13 21:07:48');
+(1, 6, '232425265', '081334709', 'Kiaracondong', '2026-04-13 21:06:00', '2026-04-13 21:06:31');
 
 -- --------------------------------------------------------
 
@@ -156,8 +414,8 @@ CREATE TABLE `bukus` (
 --
 
 INSERT INTO `bukus` (`id`, `judul`, `pengarang_id`, `penerbit_id`, `kategori_id`, `isbn`, `tahun`, `stok`, `cover`, `created_at`, `updated_at`, `rak_id`) VALUES
-(1, 'Mie Ayam Sebelum Mati', 1, 1, 12, NULL, NULL, 799, '1776322375_69e08747a3025.png', '2026-04-13 22:26:06', '2026-04-16 00:20:48', 1),
-(2, 'Prabowo Apa Adanya', 2, 2, 1, NULL, NULL, 1000, '1776323993_69e08d9961105.png', '2026-04-16 00:19:53', '2026-04-16 00:19:53', 5);
+(1, 'Mie Ayam Sebelum Mati', 1, 1, 12, NULL, NULL, 800, '1776322375_69e08747a3025.png', '2026-04-13 22:26:06', '2026-04-20 08:15:42', 1),
+(2, 'Prabowo Apa Adanya', 2, 2, 1, NULL, NULL, 999, '1776323993_69e08d9961105.png', '2026-04-16 00:19:53', '2026-04-20 15:44:50', 5);
 
 -- --------------------------------------------------------
 
@@ -365,7 +623,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (30, '2026_04_15_create_denda_table', 23),
 (31, '2026_04_15_161555_add_action_to_activity_logs_table', 24),
 (32, '2026_04_15_161855_drop_activity_from_activity_logs', 25),
-(33, '2026_04_16_030031_add_rak_id_to_bukus_table', 26);
+(33, '2026_04_16_030031_add_rak_id_to_bukus_table', 26),
+(34, '2026_04_17_120000_sync_activity_logs_schema', 27);
 
 -- --------------------------------------------------------
 
@@ -402,10 +661,6 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`id`, `user_id`, `buku_id`, `tanggal_pinjam`, `tanggal_jatuh_tempo`, `tanggal_kembali`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '2026-04-14 05:47:25', NULL, NULL, 'ditolak', '2026-04-13 22:47:25', '2026-04-13 23:33:08'),
-(2, 2, 1, '2026-04-14 05:47:29', NULL, NULL, 'selesai', '2026-04-13 22:47:29', '2026-04-14 00:09:36'),
-(3, 2, 1, '2026-04-14 05:47:32', NULL, NULL, 'selesai', '2026-04-13 22:47:32', '2026-04-14 00:05:27'),
-(4, 2, 1, '2026-04-14 06:36:19', NULL, NULL, 'ditolak', '2026-04-13 23:36:19', '2026-04-13 23:41:16'),
 (5, 10, 1, '2026-04-15 03:02:13', NULL, NULL, 'selesai', '2026-04-14 20:02:13', '2026-04-15 08:47:10'),
 (6, 10, 1, '2026-04-15 03:15:17', NULL, NULL, 'ditolak', '2026-04-14 20:15:17', '2026-04-15 08:35:48'),
 (7, 10, 1, '2026-04-15 03:18:56', NULL, NULL, 'ditolak', '2026-04-14 20:18:56', '2026-04-15 08:35:45'),
@@ -424,7 +679,8 @@ INSERT INTO `peminjaman` (`id`, `user_id`, `buku_id`, `tanggal_pinjam`, `tanggal
 (20, 10, 1, '2026-04-16 02:07:12', '2026-04-23', '2026-04-16 02:07:29', 'dikembalikan', '2026-04-15 19:06:55', '2026-04-15 19:07:29'),
 (22, 10, 1, '2026-04-16 02:14:44', '2026-04-10', '2026-04-16 02:26:42', 'dikembalikan', '2026-04-15 19:14:36', '2026-04-15 19:26:42'),
 (23, 10, 1, '2026-04-16 02:42:46', '2026-04-05', '2026-04-16 02:43:33', 'dikembalikan', '2026-04-15 19:42:38', '2026-04-15 19:43:33'),
-(24, 10, 1, '2026-04-16 07:11:59', '2026-04-23', NULL, 'dipinjam', '2026-04-15 20:50:23', '2026-04-16 00:11:59');
+(24, 10, 1, '2026-04-16 07:11:59', '2026-04-23', '2026-04-20 15:15:42', 'dikembalikan', '2026-04-15 20:50:23', '2026-04-20 08:15:42'),
+(25, 10, 2, '2026-04-20 15:15:40', '2026-04-27', NULL, 'dipinjam', '2026-04-20 08:14:23', '2026-04-20 08:15:40');
 
 -- --------------------------------------------------------
 
@@ -451,7 +707,8 @@ CREATE TABLE `penerbits` (
 
 INSERT INTO `penerbits` (`id`, `nama`, `kode`, `kota`, `negara`, `alamat`, `telepon`, `email`, `created_at`, `updated_at`) VALUES
 (1, 'Telkom University', '98', 'Bandung', 'Indonesia', 'Bandung', '655866453', 'Telkom@gmail.com', '2026-04-13 19:10:17', '2026-04-13 19:10:29'),
-(2, 'Gramedia', '2002', 'Bandung', 'Indonesia', 'Bandung', '4535435', 'Gramedia@gmail.com', '2026-04-16 00:09:55', '2026-04-16 00:09:55');
+(2, 'Gramedia', '2002', 'Bandung', 'Indonesia', 'Bandung', '4535435', 'Gramedia@gmail.com', '2026-04-16 00:09:55', '2026-04-16 00:09:55'),
+(3, 'Smk MVP', '87387', 'bandung', 'Indonesia', 'antapani', '089898777', 'mvp@gmail.com', '2026-04-20 08:13:00', '2026-04-20 08:13:00');
 
 -- --------------------------------------------------------
 
@@ -476,7 +733,8 @@ CREATE TABLE `pengarangs` (
 INSERT INTO `pengarangs` (`id`, `nama`, `email`, `telepon`, `alamat`, `created_at`, `updated_at`) VALUES
 (1, 'Yana', 'yana@gmail.com', '093482384', 'Antapani Lama', '2026-04-13 19:31:19', '2026-04-13 19:31:19'),
 (2, 'Alibama', 'alibama@gmail.com', '085634343', 'antapni', '2026-04-15 19:27:11', '2026-04-15 19:27:22'),
-(3, 'Joko Anwar', 'anwar@gmail.com', '4543436', 'Jakarta', '2026-04-16 00:09:19', '2026-04-16 00:09:19');
+(3, 'Joko Anwar', 'anwar@gmail.com', '4543436', 'Jakarta', '2026-04-16 00:09:19', '2026-04-16 00:09:19'),
+(4, 'Zulham', 'xulfan@gmail.com', '8787888', 'antapni lama', '2026-04-20 08:11:53', '2026-04-20 08:12:04');
 
 -- --------------------------------------------------------
 
@@ -508,13 +766,6 @@ CREATE TABLE `petugas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `petugas`
---
-
-INSERT INTO `petugas` (`id`, `user_id`, `nip`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 8, '232424234', '08965965', 'Smk mvp ars', '2026-04-13 21:21:19', '2026-04-13 21:22:32');
 
 -- --------------------------------------------------------
 
@@ -591,15 +842,14 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `alamat`, `telp`) VALUES
 (1, 'Daveiz', 'admindaveiz@gmail.com', 'admin', NULL, '$2y$12$w15PhiMD4/g8Ays/N81ej.waaYmj2tdMsqQFjZCGZVV9Df5DgW76m', NULL, '2026-04-06 20:16:19', '2026-04-06 20:16:19', NULL, NULL),
-(2, 'adminukk', 'admin@ukk2026.com', 'admin', NULL, '$2y$12$sCo6l0wsVhInTwYgc.sm1OP1SIGE4vCbYxhLoqYKTqqI2qG5I.O5y', NULL, '2026-04-08 02:48:48', '2026-04-08 02:48:48', NULL, NULL),
 (3, 'Daveiz Alibama', 'daveiz@gmail.com', 'anggota', NULL, '$2y$12$XoH7M6Ia.noBV2oAgHxKR.7QZtNrnHH6NBnkZnhGxIHoLS4ldvmMK', NULL, '2026-04-12 21:16:33', '2026-04-12 21:16:33', NULL, NULL),
 (4, 'Deril', 'deril@gmail.com', 'anggota', NULL, '$2y$12$eEBuOzB8LbElhsZa4AJcueUJTHPaN0MSBwqje7hojKkxtkM9Os4tq', NULL, '2026-04-13 19:55:45', '2026-04-13 19:55:45', NULL, NULL),
 (5, 'admin', 'sdasdasd@ekmkef.com', 'anggota', NULL, '$2y$12$b66todTh9jzMx11fyIljZuR/uvXUgSgQPMlKsNQ7bdDFJ61gVIsDC', NULL, '2026-04-13 20:52:16', '2026-04-13 20:52:16', NULL, NULL),
 (6, 'dapes', 'dapes@gmail.com', 'anggota', NULL, '$2y$12$15BWqomzw.HmXNt4LCbXwutL9sk4YEVrJl3BwyfM7qcS0TEfN/HFy', NULL, '2026-04-13 21:06:00', '2026-04-13 21:06:00', NULL, NULL),
-(7, 'adminukk', 'adminukk@gmail.com', 'anggota', NULL, '$2y$12$h6BPvGie4zWtLUFljcLaXOWQ4TU18NDOlMy0EmPbWQ2MwjEBGzy0S', NULL, '2026-04-13 21:07:48', '2026-04-13 21:08:03', NULL, NULL),
-(8, 'petugasukk', 'petugas@ukk2026.com', 'anggota', NULL, '$2y$12$aVKiIIU6Pj3kS/MRza5UR.90.htfboIymRStjFvlkuZVg2vpp.kYu', NULL, '2026-04-13 21:21:19', '2026-04-13 21:21:19', NULL, NULL),
-(9, 'petugasukk', 'petugas@gmail.com', 'petugas', NULL, '$2y$12$NPwd.q3BE2el1UaQbjajXOACD98eGgkeYaDzkQdksKoHYN5o4vZm6', NULL, '2026-04-14 18:21:19', '2026-04-14 18:21:19', NULL, NULL),
-(10, 'siswa', 'siswa@gmail.com', 'anggota', NULL, '$2y$12$5CxLqw.IBps11L1i630Qje49De5rOfRoXXZqduwnWey7kDc2vUZNa', NULL, '2026-04-14 19:09:09', '2026-04-14 19:09:09', NULL, NULL);
+(10, 'siswa', 'siswa@gmail.com', 'anggota', NULL, '$2y$12$5CxLqw.IBps11L1i630Qje49De5rOfRoXXZqduwnWey7kDc2vUZNa', NULL, '2026-04-14 19:09:09', '2026-04-14 19:09:09', NULL, NULL),
+(14, 'anggotaukk2026', 'anggota@ukk2026.com', 'anggota', NULL, '$2y$12$q2U9QtPatlTJOeVSBpzS5OlbWymcg3vijeKfcaO1mSZnHbVLDF.Jq', NULL, '2026-04-20 15:49:33', '2026-04-20 15:49:33', NULL, NULL),
+(15, 'adminukk2026', 'admin@ukk2026.com', 'admin', NULL, '$2y$12$R2uv8l7cod6imHHC0eNdJO.YrvHdF2.hHgzxIaM/t8j2DcGzr6Yz6', NULL, '2026-04-20 15:50:24', '2026-04-20 15:50:24', NULL, NULL),
+(16, 'petugasukk2026', 'petugas@ukk2026.com', 'petugas', NULL, '$2y$12$Bm3MQgt5.Rp4upphZ7zVAezCITGLvurqNLWApFvqx5uVhNYvwnXae', NULL, '2026-04-20 15:51:03', '2026-04-20 15:51:03', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -610,7 +860,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `role`, `email_verified_at`, `passwo
 --
 ALTER TABLE `activity_logs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `activity_logs_user_id_foreign` (`user_id`);
+  ADD KEY `idx_created_at` (`created_at`),
+  ADD KEY `idx_user_id` (`user_id`);
 
 --
 -- Indexes for table `admins`
@@ -770,7 +1021,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -824,25 +1075,25 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `penerbits`
 --
 ALTER TABLE `penerbits`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengarangs`
 --
 ALTER TABLE `pengarangs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pengembalian`
@@ -866,7 +1117,7 @@ ALTER TABLE `raks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
